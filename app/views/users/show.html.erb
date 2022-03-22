@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <strong>Name</strong>
+          <div class="card card-body">
+            <%= @user&.name || '' %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <strong>Email</strong>
+          <div class="card card-body">
+            <%= @user.email %>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>Address</strong>
+        <div class="card card-body">
+          <%= @user.address %>
+        </div>
+      </div>
+  </div>
+</div>
+

@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 mb-2">
+      <input id="search_general" type="text" class="validate form-control" placeholder="General Search" >
+    </div>
+  </div>
+  <br>
+</div>
+
+<script  type="text/javascript">
+    $(function() {
+        $('form').each(function() {
+            $(this).find('input').keypress(function(e) {
+                // Enter pressed?
+                if(e.which == 10 || e.which == 13) {
+                    this.form.submit();
+                }
+            });
+
+            $(this).find('input[type=submit]').hide();
+        });
+    });
+</script>
+
+<script type="text/javascript" charset="utf-8">
+    var searchBox = document.getElementById('search_general');
+
+    searchBox.onkeyup = function(){
+        var filter = searchBox.value.toLowerCase();
+        var tr = document.getElementById('table_results').getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            var td_one = tr[i].getElementsByTagName("td")[0];
+            var td_two = tr[i].getElementsByTagName("td")[1];
+            var td_three = tr[i].getElementsByTagName("td")[2];
+            var td_four = tr[i].getElementsByTagName("td")[3];
+            var td_five = tr[i].getElementsByTagName("td")[4];
+            var td_six = tr[i].getElementsByTagName("td")[5];
+
+            if (td_one || td_two || td_three || td_four || td_five || td_six) {
+                var txtValue = td_one.textContent || td_one.innerText;
+                var txtValue2 = td_two.textContent || td_two.innerText;
+                var txtValue3 = td_three.textContent || td_three.innerText;
+                var txtValue4 = td_four.textContent || td_four.innerText;
+                var txtValue5 = td_five.textContent || td_five.innerText;
+                var txtValue6 = td_six.textContent || td_six.innerText;
+                if ( txtValue.toLowerCase().indexOf(filter) > -1 ||
+                    txtValue2.toLowerCase().indexOf(filter) > -1 ||
+                    txtValue3.toLowerCase().indexOf(filter) > -1 ||
+                    txtValue4.toLowerCase().indexOf(filter) > -1 ||
+                    txtValue5.toLowerCase().indexOf(filter) > -1 ||
+                    txtValue6.toLowerCase().indexOf(filter) > -1 ){
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

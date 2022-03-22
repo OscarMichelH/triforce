@@ -1,0 +1,48 @@
+<div class="header py-5 py-lg-8 pt-lg-9">
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-4 card">
+
+        <div class="align-content-center text-center pt-2 mt-3">
+          <h3>Access to your account</h3>
+        </div>
+
+        <%= form_for(resource, as: resource_name, html: {class: '', role: 'form'},url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :recordarme %>
+            </div>
+          <% end %>
+
+
+          <div class="align-content-center text-center pt-4">
+            <%= f.submit "LOG IN", class: "btn-primary rounded-pill bold px-5 p-2", style: '' %>
+          </div>
+          <%= render "devise/shared/links" %>
+
+        <% end %>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
