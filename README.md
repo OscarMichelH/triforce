@@ -1,8 +1,8 @@
-#Bookstore
-### Demo Site - 
+# Bookstore
+### Demo Site - https://bs-challenge.herokuapp.com/
 email: oscarmichelh@gmail.com
 
-###Summary
+### Summary
 Experience using Rails and Ruby:
 I started around 2017 with Rails, I remember installed in my local the last version of Rails 3, but I started formally with version 4. I learned to write code in C++, but when I found ruby, I switch it to my main lenguage for any project where ruby or Rails framework was allowed.
 In my first hackaton without knowledge yet of git tools or another things I developed with a friend a gem to document code:
