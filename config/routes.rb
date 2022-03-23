@@ -7,8 +7,9 @@ Rails.application.routes.draw do
     end
 
     authenticated do
-      root 'users#index', as: :authenticated_root
+      root 'books#index', as: :authenticated_root
       resources :users, only: [:index, :new, :create, :edit, :show, :update, :destroy]
+      resources :books
     end
   end
 end

@@ -7,6 +7,11 @@
 
         <div class="align-content-center text-center pt-2 mt-3">
             <h3>Register a new account</h3>
+            Select account type:
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-secondary" id="buyer_btn">Buyer</button>
+              <button type="button" class="btn btn-secondary" id="seller_btn">Seller</button>
+            </div>
         </div>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
@@ -15,6 +20,28 @@
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
           </div>
+
+          <div class="field">
+            <%= f.label :name %><br />
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
+          </div>
+
+          <div id="buyer_field" style="display: none;">
+            <div class="field">
+              <%= f.label :address %><br />
+              <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', id:'buyer_field_address' %>
+            </div>
+          </div>
+
+
+          <div id="seller_field" style="display: none;">
+            <div class="field">
+              <%= f.label :phone %><br />
+              <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", class: 'form-control', id: 'seller_field_phone' %>
+            </div>
+          </div>
+
+
 
           <div class="field">
             <%= f.label :password %>
@@ -45,5 +72,22 @@
 </div>
 
 
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $(".btn-group > .btn").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        });
+        $( "#buyer_btn" ).on('click', function() {
+            $('#seller_field_phone').val("");
+            $( "#buyer_field" ).show();
+            $( "#seller_field" ).hide();
 
+        })
+        $( "#seller_btn" ).on('click', function() {
+            $('#buyer_field_address').val("");
+            $( "#seller_field" ).show();
+            $( "#buyer_field" ).hide();
+        })
+    });
+</script>
 
