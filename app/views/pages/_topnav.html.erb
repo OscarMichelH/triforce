@@ -11,6 +11,12 @@
 
 
         <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+          <li class="nav-item">
+            <h1><%= link_to 'Book Store', root_path %></h1>
+          </li>
+          <li class="nav-item">
+            <%=link_to 'My Shopping Cart', cart_path(current_user.cart), class: 'btn btn-primary mr-2' if current_user.is_buyer?%>
+          </li>
           <li class="nav-item dropdown ">
             <div class="dropdown ">
               <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">

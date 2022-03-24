@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   validate :buyer_xor_seller
-
+  has_one :cart
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

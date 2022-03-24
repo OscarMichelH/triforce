@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+
+<% @cart.books.each do |book| %>
+  <div class="row">
+  <div class="col-2">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= book.title %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Author: <%= book.author %></h6>
+          <p class="card-text"><%=book.description %></p>
+          <a href="#" class="card-link">Price: <%= book.price %></a>
+        </div>
+      </div>
+    </div>
+
+    <!--    <tr>-->
+    <!--      <td><%#= link_to 'Show', book %></td>-->
+    <!--      <td><%#= link_to 'Edit', edit_book_path(book) %></td>-->
+    <!--      <td><%#= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    <!--    </tr>-->
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-12">
+    <p>Total: <%= @cart.books&.sum(:price) %></p>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_cart_path(@cart) %> |
+<%= link_to 'Back', carts_path %>

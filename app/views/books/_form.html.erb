@@ -13,33 +13,31 @@
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :author %>
-    <%= form.text_field :author %>
-  </div>
-
-  <div class="field">
-    <%= form.label :seller %>
-    <%= form.text_field :seller %>
+    <%= form.text_field :author, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.text_field :price %>
+    <%= form.text_field :price, class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.label :stock %>
+    <%= form.text_field :stock, class: 'form-control' %>
   </div>
+
+    <%= form.hidden_field :user_id, value: current_user.id %>
+
 
   <div class="actions">
     <%= form.submit %>

@@ -3,7 +3,11 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(sign_up_params)
     @user.role = 'SELLER' unless sign_up_params[:phone].blank?
-    @user.balance = 0.0 if @user.role == 'SELLER'
+    @user.balance = 0.0 if @user.is_seller?
+    if(@user.is_buyer?)
+      cart = Cart.new(user: @user)
+      cart.save
+    end
     respond_to do |format|
       if @user.save
         format.html { redirect_to root_path, notice: 'User created successfully.' }

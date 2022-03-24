@@ -2,35 +2,29 @@
 
 <h1>Books</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Author</th>
-      <th>Seller</th>
-      <th>Price</th>
-      <th>Seller</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <% @books.each do |book| %>
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title d-inline"><%= book.title %></h5>
+          <p class="badge badge-secondary">Price: <%= book.price %></p>
+          <h6 class="card-subtitle mb-2 text-muted pt-2">Author: <%= book.author %></h6>
+          <p class="card-text"><%=book.description %></p>
+          <p class="badge badge-light d-inline">Stock: <%= book.stock %></p>
+          <br>
+          <%= link_to 'Add To Card', add_book_path(book) %>
+        </div>
+      </div>
+    </div>
 
-  <tbody>
-    <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
-        <td><%= book.description %></td>
-        <td><%= book.author %></td>
-        <td><%= book.seller %></td>
-        <td><%= book.price %></td>
-        <td><%= book.user&.email %></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<!--    <tr>-->
+<!--      <td><%#= link_to 'Show', book %></td>-->
+<!--      <td><%#= link_to 'Edit', edit_book_path(book) %></td>-->
+<!--      <td><%#= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+<!--    </tr>-->
+  <% end %>
+</div>
 
 <br>
 

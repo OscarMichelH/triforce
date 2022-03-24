@@ -16,18 +16,13 @@
 </p>
 
 <p>
-  <strong>Seller:</strong>
-  <%= @book.seller %>
-</p>
-
-<p>
   <strong>Price:</strong>
   <%= @book.price %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @book.user_id %>
+  <strong>Seller:</strong>
+  <%= @book.user&.name %>
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
