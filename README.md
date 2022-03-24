@@ -1,5 +1,6 @@
 # Bookstore
 ### Demo Site - https://bs-challenge.herokuapp.com/
+#### Entity Relationship Diagram - https://github.com/OscarMichelH/bookstore/blob/master/erd.pdf
 email: oscarmichelh@gmail.com
 
 ### Summary
