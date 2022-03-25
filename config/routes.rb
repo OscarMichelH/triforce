@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :new, :create, :edit, :show, :update, :destroy]
       resources :books
       get '/add_book/:book_id', to: 'carts#add_book', as: 'add_book'
+      delete '/delete_book/:book_id', to: 'carts#delete_book', as: 'delete_book'
+      get '/pay_cart', to: 'carts#pay_cart', as: 'pay_cart'
     end
   end
 end

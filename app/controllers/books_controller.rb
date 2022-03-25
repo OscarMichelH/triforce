@@ -3,7 +3,13 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @books = current_user.books
+    if params[:buyer_libray]
+      @books = current_user.books
+    else
+      @books = current_user.books if current_user.is_seller?
+      @books = Book.all if current_user.is_buyer?
+    end
+
   end
 
   # GET /books/1 or /books/1.json

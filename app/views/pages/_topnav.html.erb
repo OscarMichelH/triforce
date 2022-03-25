@@ -1,62 +1,67 @@
-<nav class="navbar navbar-top navbar-expand bg-white navbar-dark border-bottom " >
+<nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom " >
 
   <% if !current_user %>
-    <div class="pl-3">
+    <div class="pl-3 text-white">
       <h1>Bookstore</h1>
     </div>
-  <% end %>
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <%  else %>
+    <div class="container-fluid">
       <% if user_signed_in? %>
-
-
-        <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <h1><%= link_to 'Book Store', root_path %></h1>
+            <h1><%= link_to 'Book Store', root_path, class: 'text-white' %></h1>
           </li>
-          <li class="nav-item">
-            <%=link_to 'My Shopping Cart', cart_path(current_user.cart), class: 'btn btn-primary mr-2' if current_user.is_buyer?%>
-          </li>
-          <li class="nav-item dropdown ">
-            <div class="dropdown ">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="media align-items-center">
+
+        </ul>
+        <div class="navbar-collapse collapse order-3">
+          <ul class="navbar-nav ml-auto">
+            <% if current_user.is_buyer? %>
+              <li class="nav-item pt-2 mr-2">
+                <%= link_to  cart_path(current_user.cart) do %>
+                  <i class="bi bi-cart-fill text-white"></i>
+                <% end %>
+              </li>
+            <% end %>
+            <li class="nav-item">
+              <div class="card mr-2 mt-2">
+                Balance: <%= current_user.balance %>
+              </div>
+            </li>
+      <% end %>
+      <li class="nav-item dropdown text-right">
+        <div class="dropdown ">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
                 <%= image_tag "blank-profile.png", class: "navbar-brand-img", alt: "..." %>
               </span>
-                  <div class="media-body  ml-2  d-none d-lg-block text-dark">
-                    <span class="mb-0 text-sm  font-weight-bold"><%= current_user.email %></span>
-                  </div>
-                </div>
-              </a>
-
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <div class="dropdown-header noti-title">
-                  <h6 class="text-overflow m-0">Welcome</h6>
-                </div>
-
-                <%= link_to current_user , class: 'dropdown-item' do %>
-                  <i class="ni ni-single-02"></i>
-                  <span>My User</span>
-                <% end %>
-                <% if user_signed_in? %>
-                  <div class="dropdown-divider"></div>
-                  <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do %>
-                    <i class="ni ni-user-run"></i>
-                    <span>Sign Out</span>
-                  <% end %>
-                <% end %>
-              </ul>
+              <div class="media-body  ml-2  d-none d-lg-block text-dark">
+                <span class="mb-0 text-sm  font-weight-bold text-white"><%= current_user.email %></span>
+              </div>
             </div>
-          </li>
-          <li>
-            <div class="card ml-2">
-              Balance: <%= current_user.balance %>
+          </a>
 
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-header noti-title">
+              <h6 class="text-overflow m-0">Welcome</h6>
             </div>
-          </li>
-        </ul>
-      <% end %>
+
+            <%= link_to current_user , class: 'dropdown-item' do %>
+              <i class="ni ni-single-02"></i>
+              <span>My User</span>
+            <% end %>
+            <% if user_signed_in? %>
+              <div class="dropdown-divider"></div>
+              <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do %>
+                <i class="ni ni-user-run"></i>
+                <span>Sign Out</span>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      </ul>
+      </div>
     </div>
-  </div>
+  <% end %>
 </nav>

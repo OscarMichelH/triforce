@@ -65,6 +65,30 @@ class CartsController < ApplicationController
     redirect_to cart
   end
 
+  def delete_book
+    cart = current_user.cart
+    book = Book.find(params[:book_id])
+    cart.books.delete(book)
+    cart.save
+    redirect_to cart, notice: 'Book removed from cart.'
+  end
+
+  def pay_cart
+    cart = current_user.cart
+    total_to_pay = cart.books&.sum(:price)
+    redirect_to cart, notice: 'You dont have enough balance.' if total_to_pay > current_user.balance
+    current_user.balance = current_user.balance - total_to_pay
+    cart.books&.each do |book|
+      book.stock = book.stock - 1
+      book.save
+      book.price = nil
+      book.stock = nil
+      current_user.books << book.clone
+      current_user.save
+    end
+    redirect_to root_path, notice: 'Payment succesfully, books added to your library'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
