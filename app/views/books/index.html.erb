@@ -1,41 +1,73 @@
 <p id="notice"><%= notice %></p>
 
 
-<% if !params['buyer_libray'] %>
-  <h1>Books</h1>
-<% else %>
-  <h1>My Books</h1>
-<% end %>
 
-<div class="row">
-  <% @books.each do |book| %>
-    <div class="col-4">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title d-inline"><%= book.title %></h5>
-          <% if !params['buyer_libray'] %>
-            <p class="badge badge-secondary">Price: <%= book.price %></p>
-          <% end %>
-          <h6 class="card-subtitle mb-2 text-muted pt-2">Author: <%= book.author %></h6>
-          <p class="card-text"><%=book.description.truncate(100) %></p>
-          <% if !params['buyer_libray'] %>
+<div class="container-fluid">
+
+  <div class="row mb-2">
+
+    <div class="col-1">
+      <% if !params['buyer_libray'] %>
+        <h1>Books</h1>
+      <% else %>
+        <h1>My Books</h1>
+      <% end %>
+    </div>
+    <div class="col-11">
+      <input id="search_general" type="text" class="validate form-control ml-2 mt-2" placeholder="General Search (Look for title, author, or description)" >
+    </div>
+  </div>
+  <br>
+  <div class="row" id="table_results">
+    <% @books&.each do |book| %>
+      <div class="card col-3 mx-1" style="width: 16rem;">
+        <h5 class="card-title d-inline"><%= book.title %></h5>
+        <% if !params['buyer_libray'] %>
+          <p class="badge badge-secondary">Price: <%= book.price %></p>
+        <% end %>
+        <b class="card-subtitle mb-2 text-muted pt-2">Author: <%= book.author %></b>
+        <p class="card-text"><%=book.description.truncate(100) %></p>
+        <% if !params['buyer_libray'] %>
           <p class="badge badge-light d-inline">Stock: <%= book.stock %></p>
           <br>
           <%= link_to 'Add To Card', add_book_path(book) if current_user.is_buyer? %>
-          <% end %>
-          <%= link_to 'Edit', edit_book_path(book) if current_user.is_seller? %>
-        </div>
+        <% end %>
+        <%= link_to 'Edit', edit_book_path(book) if current_user.is_seller? %>
       </div>
-    </div>
+    <% end %>
+  </div>
 
-<!--    <tr>-->
-<!--      <td><%#= link_to 'Show', book %></td>-->
-<!--      <td><%#= link_to 'Edit', edit_book_path(book) %></td>-->
-<!--      <td><%#= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-<!--    </tr>-->
-  <% end %>
 </div>
+
 
 <br>
 
 <%= link_to 'New Book', new_book_path if current_user.is_seller? %>
+
+<script type="text/javascript" charset="utf-8">
+    var searchBox = document.getElementById('search_general');
+
+    searchBox.onkeyup = function(){
+        var filter = searchBox.value.toLowerCase();
+        var tr = document.getElementById('table_results').getElementsByTagName("div");
+
+        for (i = 0; i < tr.length; i++) {
+            var td_one = tr[i].getElementsByTagName("h5")[0];
+            var td_two = tr[i].getElementsByTagName("b")[0];
+            var td_three = tr[i].getElementsByTagName("p")[1];
+
+            if (td_one || td_two || td_three) {
+                var txtValue = td_one.textContent || td_one.innerText;
+                var txtValue2 = td_two.textContent || td_two.innerText;
+                var txtValue3 = td_three.textContent || td_three.innerText;
+                if ( txtValue.toLowerCase().indexOf(filter) > -1 ||
+                    txtValue2.toLowerCase().indexOf(filter) > -1 ||
+                    txtValue3.toLowerCase().indexOf(filter) > -1 ){
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

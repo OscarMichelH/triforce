@@ -1,7 +1,8 @@
 <aside>
   <div class="sidebar left bg-dark h-1000">
       <ul>
-        <li><%= link_to 'My Library', books_path(buyer_libray: true), class: 'text-white' %></li>
+        <li><%= link_to 'My Library', books_path(buyer_libray: true), class: 'text-white'%></li>
+        <li><%= link_to 'Sales', , class: 'text-white' if current_user.is_seller?%> </li>
       </ul>
   </div>
 </aside>

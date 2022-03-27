@@ -17,6 +17,10 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def earnings
+
+  end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
