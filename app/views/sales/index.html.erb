@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sales</h1>
+
+<div class="card">
+  <div class="card-title">
+    Summary
+  </div>
+  <div class="card-body">
+    <b>Total sales:</b> <%= @sales.count %>
+    <br>
+    <b>Total sales amount:</b> <%= '$' + @amount_sold.to_s %>
+    <br>
+    <b>Application sales fees:</b> <%= '$' + @sales.count.to_s %>
+    <br>
+    <b>Earnings:</b> <%= '$' + (@amount_sold - @sales.count).to_s %>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Book</th>
+      <th>Price</th>
+      <th>App Fee</th>
+      <th>Sale date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sales.each do |sale| %>
+      <tr>
+        <td><%= sale.book.title %></td>
+        <td><%= sale.book.price %></td>
+        <td><%= sale.app_fee || 0%></td>
+        <td><%= sale.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sale', new_sale_path %>

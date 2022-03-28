@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :carts
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   devise_scope :user do
@@ -14,6 +13,8 @@ Rails.application.routes.draw do
       get '/add_book/:book_id', to: 'carts#add_book', as: 'add_book'
       delete '/delete_book/:book_id', to: 'carts#delete_book', as: 'delete_book'
       get '/pay_cart', to: 'carts#pay_cart', as: 'pay_cart'
+      resources :sales
+      resources :carts
     end
   end
 end

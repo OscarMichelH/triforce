@@ -1,8 +1,22 @@
 <aside>
   <div class="sidebar left bg-dark h-1000">
-      <ul>
-        <li><%= link_to 'My Library', books_path(buyer_libray: true), class: 'text-white'%></li>
-        <li><%= link_to 'Sales', , class: 'text-white' if current_user.is_seller?%> </li>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to books_path(buyer_libray: true), class: 'm-1 text-white' do %>
+            <i class="bi bi-collection-fill text-white ml-3"></i>
+            <span class="nav-link-text text-white ml-1">My Library</span>
+          <% end %>
+        </li>
+        <% if current_user.is_seller? %>
+        <li class="nav-item">
+          <%= link_to sales_path, class: 'm-1 text-white' do %>
+            <i class="bi bi-cash-coin text-white ml-3"></i>
+            <span class="nav-link-text text-white ml-1">Sales</span>
+          <% end %>
+        </li>
+        <% end %>
+
+
       </ul>
   </div>
 </aside>

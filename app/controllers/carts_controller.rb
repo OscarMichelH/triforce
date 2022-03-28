@@ -60,15 +60,22 @@ class CartsController < ApplicationController
   def add_book
     cart = current_user.cart
     book = Book.find(params[:book_id])
-    cart.books << book
-    cart.save
-    redirect_to cart
+    same_books_already_added = cart.books.where(id: book.id)
+    if (book.stock - same_books_already_added.count > 0)
+      cart.books << book
+      cart.save
+      redirect_to cart
+    else
+      redirect_to root_path, notice: 'You have all stock available in your cart'
+    end
   end
 
   def delete_book
     cart = current_user.cart
     book = Book.find(params[:book_id])
+    same_books_already_added = cart.books.where(id: book.id).count
     cart.books.delete(book)
+    (1..same_books_already_added-1).each { cart.books << book }
     cart.save
     redirect_to cart, notice: 'Book removed from cart.'
   end
@@ -78,13 +85,33 @@ class CartsController < ApplicationController
     total_to_pay = cart.books&.sum(:price)
     redirect_to cart, notice: 'You dont have enough balance.' if total_to_pay > current_user.balance
     current_user.balance = current_user.balance - total_to_pay
-    cart.books&.each do |book|
-      book.stock = book.stock - 1
-      book.save
-      book.price = nil
-      book.stock = nil
-      current_user.books << book.clone
-      current_user.save
+    # Pass the book information to buyer and save the sale to seller
+    last_book = 0
+    stock_to_discount = 1
+    cart.books&.order("id ASC")&.each do |book|
+      if(last_book == book.id)
+        stock_to_discount += 1
+      else
+        stock_to_discount = 1
+      end
+      if (book.stock - stock_to_discount >= 0)
+        book.update(stock: book.stock - stock_to_discount)
+        seller = User.find(book.user.id)
+        sold_book = book.dup
+        sold_book.sold = true
+        sold_book.stock = nil
+        current_user.books << sold_book
+        current_user.save
+        sale = Sale.new(user: seller, book: sold_book, app_fee: $app_fee)
+        if sale.save!
+          seller.balance += sold_book.price - $app_fee
+          seller.save!
+          cart.books.delete(book)
+          cart.save
+        end
+      else
+      end
+      last_book = book.id
     end
     redirect_to root_path, notice: 'Payment succesfully, books added to your library'
   end

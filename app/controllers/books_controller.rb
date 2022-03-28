@@ -7,7 +7,7 @@ class BooksController < ApplicationController
       @books = current_user.books
     else
       @books = current_user.books if current_user.is_seller?
-      @books = Book.all if current_user.is_buyer?
+      @books = Book.where(sold: false) if current_user.is_buyer?
     end
 
   end

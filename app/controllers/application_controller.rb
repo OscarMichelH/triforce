@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  $app_fee = 1
+
   def authenticate_user!
     if user_signed_in?
       super

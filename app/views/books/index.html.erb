@@ -20,6 +20,8 @@
   <br>
   <div class="row" id="table_results">
     <% @books&.each do |book| %>
+      <% if book.stock && book.stock > 0  %>
+        <% end %>
       <div class="card col-3 mx-1" style="width: 16rem;">
         <h5 class="card-title d-inline"><%= book.title %></h5>
         <% if !params['buyer_libray'] %>

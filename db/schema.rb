@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_145448) do
+ActiveRecord::Schema.define(version: 2022_03_28_001104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2022_03_24_145448) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "stock", default: 1
+    t.boolean "sold", default: false
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
@@ -41,6 +42,16 @@ ActiveRecord::Schema.define(version: 2022_03_24_145448) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "app_fee"
+    t.index ["book_id"], name: "index_sales_on_book_id"
+    t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,4 +73,6 @@ ActiveRecord::Schema.define(version: 2022_03_24_145448) do
 
   add_foreign_key "books", "users"
   add_foreign_key "carts", "users"
+  add_foreign_key "sales", "books"
+  add_foreign_key "sales", "users"
 end
