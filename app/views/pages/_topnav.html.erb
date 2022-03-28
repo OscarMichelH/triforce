@@ -19,6 +19,7 @@
               <li class="nav-item pt-2 mr-2">
                 <%= link_to  cart_path(current_user.cart) do %>
                   <i class="bi bi-cart-fill text-white"></i>
+                 <p id="books_in_cart" class="d-inline text-white"><%= current_user.cart.books.count %></p>
                 <% end %>
               </li>
             <% end %>

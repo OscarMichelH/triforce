@@ -64,7 +64,10 @@ class CartsController < ApplicationController
     if (book.stock - same_books_already_added.count > 0)
       cart.books << book
       cart.save
-      redirect_to cart
+      respond_to do |format|
+        format.html
+        format.js
+      end
     else
       redirect_to root_path, notice: 'You have all stock available in your cart'
     end
