@@ -13,21 +13,20 @@
           </li>
 
         </ul>
-        <div class="navbar-collapse collapse order-3">
-          <ul class="navbar-nav ml-auto">
-            <% if current_user.is_buyer? %>
-              <li class="nav-item pt-2 mr-2">
-                <%= link_to  cart_path(current_user.cart) do %>
-                  <i class="bi bi-cart-fill text-white"></i>
-                 <p id="books_in_cart" class="d-inline text-white"><%= current_user.cart.books.count %></p>
-                <% end %>
-              </li>
-            <% end %>
-            <li class="nav-item">
-              <div class="card mr-2 mt-2">
-                Balance: <%= current_user.balance %>
-              </div>
+        <ul class="navbar-nav ml-auto text-right align-content-end">
+          <% if current_user.is_buyer? %>
+            <li class="nav-item pt-2 mr-2">
+              <%= link_to  cart_path(current_user.cart) do %>
+                <i class="bi bi-cart-fill text-white"></i>
+                <p id="books_in_cart" class="d-inline text-white"><%= current_user.cart.books.count %></p>
+              <% end %>
             </li>
+          <% end %>
+          <li class="nav-item">
+            <div class="card mr-2 mt-2">
+              Balance: <%= current_user.balance %>
+            </div>
+          </li>
       <% end %>
       <li class="nav-item dropdown text-right">
         <div class="dropdown ">
@@ -62,7 +61,6 @@
         </div>
       </li>
       </ul>
-      </div>
     </div>
   <% end %>
 </nav>
