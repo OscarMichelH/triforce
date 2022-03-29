@@ -15,19 +15,19 @@
 
           <ul class="navbar-nav ml-auto text-right align-content-end">
             <% if current_user.is_buyer? %>
-              <li class="nav-item pt-2 mr-2 d-inline">
+              <li class="nav-item col-3">
                 <%= link_to cart_path(current_user&.cart&.id || '') do %>
                   <i class="bi bi-cart-fill text-white"></i>
                   <p id="books_in_cart" class="d-inline text-white mr-2"><%= current_user&.cart&.books&.count %></p>
                 <% end %>
               </li>
             <% end %>
-           <li class="nav-item mt-2 mr-2">
+           <li class="nav-item col-4">
             <div class="card">
               Balance: <%= current_user.balance %>
             </div>
             </li>
-            <li class="nav-item dropdown text-right d-inline">
+            <li class="nav-item dropdown text-right d-inline col-6">
               <div class="dropdown ">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                   <div class="media align-items-center">
