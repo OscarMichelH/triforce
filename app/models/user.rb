@@ -17,10 +17,16 @@ class User < ApplicationRecord
     role == 'SELLER'
   end
 
+  def is_admin?
+    role == 'ADMIN'
+  end
+
   private
   def buyer_xor_seller
-    if !(phone.blank? ^ address.blank?)
-      errors[:base] << "Specify an account type and fill empty fields"
+    if !is_admin?
+      if !(phone.blank? ^ address.blank?)
+        errors[:base] << "Specify an account type and fill empty fields"
+      end
     end
   end
 end

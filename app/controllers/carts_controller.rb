@@ -109,6 +109,9 @@ class CartsController < ApplicationController
         if sale.save!
           seller.balance += sold_book.price - $app_fee
           seller.save!
+          admin = User.find_by_email('admin@mail.com')
+          admin.balance += $app_fee
+          admin.save!
           cart.books.delete(book)
           cart.save
         end

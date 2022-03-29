@@ -6,14 +6,14 @@
 
   <div class="row mb-2">
 
-    <div class="col-1">
+    <div class="col-12">
       <% if !params['buyer_libray'] %>
         <h1>Books</h1>
       <% else %>
         <h1>My Books</h1>
       <% end %>
     </div>
-    <div class="col-11">
+    <div class="col-12">
       <input id="search_general" type="text" class="validate form-control ml-2 mt-2" placeholder="General Search (Look for title, author, or description)" >
     </div>
   </div>
@@ -57,7 +57,12 @@
         for (i = 0; i < tr.length; i++) {
             var td_one = tr[i].getElementsByTagName("h5")[0];
             var td_two = tr[i].getElementsByTagName("b")[0];
+            <% if !params['buyer_libray'] %>
             var td_three = tr[i].getElementsByTagName("p")[1];
+            <% else %>
+            var td_three = tr[i].getElementsByTagName("p")[0];
+
+            <% end %>
 
             if (td_one || td_two || td_three) {
                 var txtValue = td_one.textContent || td_one.innerText;
