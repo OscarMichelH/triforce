@@ -24,12 +24,12 @@
         <div class="card col-3 mx-1" style="width: 16rem;">
           <h5 class="card-title d-inline"><%= book.title %></h5>
           <% if !params['buyer_libray'] %>
-            <p class="badge badge-secondary">Price: <%= book.price %></p>
+            <p class="badge bg-secondary">Price: <%= book.price %></p>
           <% end %>
           <b class="card-subtitle mb-2 text-muted pt-2">Author: <%= book.author %></b>
           <p class="card-text"><%=book.description.truncate(100) %></p>
           <% if !params['buyer_libray'] %>
-            <p class="badge badge-light d-inline">Stock: <%= book.stock %></p>
+            <p class="badge bg-light d-inline">Stock: <%= book.stock %></p>
             <br>
             <%= link_to 'Add To Card', add_book_path(book), remote: true if current_user.is_buyer? %>
           <% end %>

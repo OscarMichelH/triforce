@@ -8,7 +8,7 @@
     <div class="container-fluid">
       <% if user_signed_in? %>
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li class="nav-item mt-2 mr-2">
             <h1><%= link_to 'Book Store', root_path, class: 'text-white' %></h1>
           </li>
 
@@ -22,8 +22,8 @@
               <% end %>
             </li>
           <% end %>
-           <li class="nav-item">
-            <div class="card mr-2 mt-2 mr-2">
+           <li class="nav-item mt-2 mr-2">
+            <div class="card">
               Balance: <%= current_user.balance %>
             </div>
           </li>
