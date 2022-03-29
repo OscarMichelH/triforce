@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-# TODO: maybe add one for :has_and_belongs_to_many?
-# TODO: Implement insertions for existing files... why??
-
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
@@ -38,7 +26,7 @@ RSpec.describe Book, type: :model do
 	  describe "Associations" do
 	  	
 	  		it "should belong to a user" do
-	  			user = FactoryBot.create(:user)
+	  			user = FactoryBot.build(:user)
 	  			book = FactoryBot.build(:book, user: user)
 	  			expect(book.user).to eq user
 	  		end
@@ -63,16 +51,16 @@ RSpec.describe Book, type: :model do
 
 	
 		describe "Graceful Destroyal" do
-			
 
-			
-				
+
+
+
 				it "should destroy the associated sales when deleted" do
 					book = FactoryBot.create(:book)
 					book.sales.create(FactoryBot.attributes_for(:sale))
 
 					expect{ book.destroy }.to change(Sale, :count).by -1
 				end
-			
+
 		end
 end

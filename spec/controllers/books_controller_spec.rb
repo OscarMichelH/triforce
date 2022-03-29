@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe BooksController, type: :controller do
 
   # Add this
-  login_buyer
+  login_user
 
   let(:valid_attributes) {
-    { :title => "Test title!", :description => "This is a test description", :status => "draft" }
+    { title: "Test title!", description: "This is a test description", price: 5, author: 'Test Author', user_id: 1, sold: false, stock: 3 }
   }
 
   let(:valid_session) { {} }

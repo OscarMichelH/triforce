@@ -1,8 +1,9 @@
 class User < ApplicationRecord
+  validates :email, uniqueness: true
   validate :buyer_xor_seller
   has_many :books
   has_one :cart
-  has_many :sales
+  has_many :sales, dependent: :delete_all
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

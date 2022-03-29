@@ -38,7 +38,7 @@ RSpec.describe Cart, type: :model do
 	  describe "Associations" do
 	  	
 	  		it "should belong to a user" do
-	  			user = FactoryBot.create(:user)
+	  			user = FactoryBot.build(:user)
 	  			cart = FactoryBot.build(:cart, user: user)
 	  			expect(cart.user).to eq user
 	  		end

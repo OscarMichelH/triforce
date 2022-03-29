@@ -1,20 +1,10 @@
-
-
-
-
-
-
-
-
-
-# TODO: maybe add one for :has_and_belongs_to_many?
-# TODO: Implement insertions for existing files... why??
-
 require 'rails_helper'
 
 RSpec.describe Sale, type: :model do
   it "should have a valid factory" do
-    sale = FactoryBot.build(:sale)
+    user = FactoryBot.build(:user)
+    book = FactoryBot.build(:book)
+    sale = FactoryBot.build(:sale, user: user, book: book)
     expect(sale).to be_valid
   end
 
@@ -38,14 +28,16 @@ RSpec.describe Sale, type: :model do
 	  describe "Associations" do
 	  	
 	  		it "should belong to a user" do
-	  			user = FactoryBot.create(:user)
-	  			sale = FactoryBot.build(:sale, user: user)
+	  			user = FactoryBot.build(:user)
+          book = FactoryBot.build(:book)
+	  			sale = FactoryBot.build(:sale, user: user, book: book)
 	  			expect(sale.user).to eq user
 	  		end
 	  	
 	  		it "should belong to a book" do
-	  			book = FactoryBot.create(:book)
-	  			sale = FactoryBot.build(:sale, book: book)
+					user = FactoryBot.build(:user)
+					book = FactoryBot.build(:book)
+	  			sale = FactoryBot.build(:sale, user: user, book: book)
 	  			expect(sale.book).to eq book
 	  		end
 	  	
