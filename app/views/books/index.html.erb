@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-
-
-<div class="container-fluid">
-
   <div class="row mb-2">
-
     <div class="col-12">
       <% if !params['buyer_libray'] %>
         <h1>Books</h1>
@@ -14,14 +9,14 @@
       <% end %>
     </div>
     <div class="col-12">
-      <input id="search_general" type="text" class="validate form-control ml-2 mt-2" placeholder="General Search (Look for title, author, or description)" >
+      <input id="search_general" type="text" class="validate form-control" placeholder="General Search (Look for title, author, or description)" >
     </div>
   </div>
   <br>
   <div class="row" id="table_results">
     <% @books&.each do |book| %>
-      <% if ((current_user.is_buyer? && book.stock && book.stock > 0) || params['buyer_libray'] || current_user.is_seller?)%>
-        <div class="card col-3 mx-1" style="width: 16rem;">
+      <% if (((current_user&.is_buyer? || true) && book.stock && book.stock > 0) || params['buyer_libray'] || current_user.is_seller?)%>
+        <div class="card col-3 mx-3" style="width: 16rem;">
           <h5 class="card-title d-inline"><%= book.title %></h5>
           <% if !params['buyer_libray'] %>
             <p class="badge bg-secondary">Price: <%= book.price %></p>
@@ -31,21 +26,20 @@
           <% if !params['buyer_libray'] %>
             <p class="badge bg-light d-inline text-dark">Stock: <%= book.stock %></p>
             <br>
-            <%= link_to 'Add To Card', add_book_path(book), remote: true if current_user.is_buyer? %>
+            <%= link_to 'Add To Card', add_book_path(book), remote: true if user_signed_in? && current_user.is_buyer? %>
           <% end %>
-          <%= link_to 'Edit', edit_book_path(book) if current_user.is_seller? %>
+          <%= link_to 'Edit', edit_book_path(book) if user_signed_in? && current_user.is_seller? %>
         </div>
 
       <% end %>
     <% end %>
   </div>
 
-</div>
 
 
 <br>
 
-<%= link_to 'New Book', new_book_path if current_user.is_seller? %>
+<%= link_to 'New Book', new_book_path if user_signed_in? && current_user.is_seller? %>
 
 <script type="text/javascript" charset="utf-8">
     var searchBox = document.getElementById('search_general');

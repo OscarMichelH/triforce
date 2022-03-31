@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     unauthenticated do
-      root 'devise/sessions#new'
+      root 'books#index'
     end
 
     authenticated do

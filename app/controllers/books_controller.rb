@@ -6,8 +6,7 @@ class BooksController < ApplicationController
     if params[:buyer_libray]
       @books = current_user.books
     else
-      @books = current_user.books if current_user.is_seller?
-      @books = Book.where(sold: false) if current_user.is_buyer?
+      @books = Book.where(sold: false)
     end
 
   end
