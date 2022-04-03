@@ -19,7 +19,10 @@
         <div class="card col-3 mx-3" style="width: 16rem;">
           <h5 class="card-title d-inline"><%= book.title %></h5>
           <% if !params['buyer_libray'] %>
-            <p class="badge bg-secondary">Price: <%= book.price %></p>
+            <p class="badge bg-primary text-white">Price: $<%= book.price %></p>
+          <% end %>
+          <% if current_user.is_seller?  %>
+            <p class="badge bg-secondary text-white">App Fee Per Sale: $<%= $app_fee %></p>
           <% end %>
           <b class="card-subtitle mb-2 text-muted pt-2">Author: <%= book.author %></b>
           <p class="card-text"><%=book.description.truncate(100) %></p>
@@ -39,7 +42,7 @@
 
 <br>
 
-<%= link_to 'New Book', new_book_path if user_signed_in? && current_user.is_seller? %>
+<%= link_to 'New Book', new_book_path, class: 'btn btn-primary rounded-pill mt-1' if user_signed_in? && current_user.is_seller? && params['buyer_libray'] %>
 
 <script type="text/javascript" charset="utf-8">
     var searchBox = document.getElementById('search_general');

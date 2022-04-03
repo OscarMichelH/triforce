@@ -5,17 +5,8 @@ class SalesController < ApplicationController
   def index
     @sales = current_user.sales
     @amount_sold = 0
-    @sales.each {|sale| @amount_sold += sale.book.price}
+    @sales.each {|sale| @amount_sold += sale&.book&.price || 0}
 
-  end
-
-  # GET /sales/1 or /sales/1.json
-  def show
-  end
-
-  # GET /sales/new
-  def new
-    @sale = Sale.new
   end
 
   # GET /sales/1/edit

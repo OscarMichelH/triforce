@@ -36,10 +36,15 @@
     <%= form.text_field :stock, class: 'form-control' %>
   </div>
 
-    <%= form.hidden_field :user_id, value: current_user.id %>
+  <div class="field">
+    <%= form.label :app_fee %>
+    <%= form.text_field :app_fee, value: '$' + $app_fee.to_s, class: 'form-control', disabled: true %>
+  </div>
 
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  <br>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Post Book", class: 'btn btn-primary rounded-pill mt-2' %>
   </div>
 <% end %>
