@@ -86,7 +86,16 @@ class CartsController < ApplicationController
   def pay_cart
     cart = current_user.cart
     total_to_pay = cart.books&.sum(:price)
-    redirect_to cart, notice: 'You dont have enough balance.' if total_to_pay > current_user.balance
+    errors = []
+    cart.books&.order("id ASC")&.each do |book|
+      if book.stock < 1
+        errors << '-Sorry book <b>' + book.title + '</b> was buyed and out of stock. <br>'
+      end
+    end
+    errors << '<b class="text-danger"> Please remove books out of stock to proceed with the buy </b>' if errors.any?
+    redirect_to cart, notice: errors.to_sentence(two_words_connector: '') and return if errors.any?
+
+    redirect_to cart, notice: 'You dont have enough balance.' and return if total_to_pay > current_user.balance
     current_user.balance = current_user.balance - total_to_pay
     # Pass the book information to buyer and save the sale to seller
     last_book = 0
