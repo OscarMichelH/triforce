@@ -4,7 +4,7 @@
   </div>
   <% if !current_user %>
 
-    <ul class="navbar-nav ml-auto text-right align-content-end">
+    <ul class="navbar-nav ml-auto text-right ms-auto mb-2 mb-lg-0 justify-content-end" >
       <div class="col-12">
         <%= link_to 'Sign in', new_user_session_path, class: 'text-white' %>
       </div>
@@ -13,7 +13,7 @@
       <div class="container-fluid">
         <% if user_signed_in? %>
 
-          <ul class="navbar-nav ml-auto text-right align-content-end">
+          <ul class="navbar-nav ml-auto text-right ms-auto mb-2 mb-lg-0 justify-content-end">
             <% if current_user.is_buyer? %>
               <li class="nav-item m-1">
                 <%= link_to cart_path(current_user&.cart&.id || '') do %>
