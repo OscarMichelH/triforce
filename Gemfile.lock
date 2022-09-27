@@ -307,7 +307,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  bootsnap (>= 1.4.4)
+  bootsnap
   bootstrap
   byebug
   capybara (>= 3.26)
