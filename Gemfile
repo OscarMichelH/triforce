@@ -37,9 +37,11 @@ gem 'font-awesome-rails'
 gem 'bootstrap'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap'
-gem 'net-ssh'
-gem 'net-smtp'
+gem 'bootsnap', require: false
+gem 'net-ssh', require: false
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 
 
 group :development, :test do
