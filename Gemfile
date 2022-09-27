@@ -39,6 +39,7 @@ gem 'bootstrap'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap'
 gem 'net-ssh'
+gem 'net-smtp'
 
 
 group :development, :test do
