@@ -1,6 +1,10 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom " >
+<nav class="navbar navbar-expand-md navbar-primary bg-primary border-bottom " >
   <div class="pl-3 text-white">
-    <h1><%= link_to 'Woman Shop', root_path, class: 'text-white' %></h1>
+    <h1 class="p-2">
+      <%= link_to root_path do %>
+        <span class="badge badge-primar">Woman Shop</span>
+      <% end %>
+    </h1>
   </div>
   <% if !current_user %>
 
