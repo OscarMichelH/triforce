@@ -15,7 +15,23 @@ ActiveRecord::Schema.define(version: 2022_03_29_005933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "books", force: :cascade do |t|
+  create_table "carts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "carts_items", id: false, force: :cascade do |t|
+    t.bigint "cart_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cart_id"], name: "index_carts_items_on_cart_id"
+    t.index ["item_id"], name: "index_carts_items_on_item_id"
+  end
+
+  create_table "items", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.string "author"
@@ -25,32 +41,16 @@ ActiveRecord::Schema.define(version: 2022_03_29_005933) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "stock", default: 1
     t.boolean "sold", default: false
-    t.index ["user_id"], name: "index_books_on_user_id"
-  end
-
-  create_table "books_carts", id: false, force: :cascade do |t|
-    t.bigint "cart_id", null: false
-    t.bigint "book_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_books_carts_on_book_id"
-    t.index ["cart_id"], name: "index_books_carts_on_cart_id"
-  end
-
-  create_table "carts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_carts_on_user_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "sales", force: :cascade do |t|
-    t.bigint "book_id", null: false
+    t.bigint "item_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "app_fee"
-    t.index ["book_id"], name: "index_sales_on_book_id"
+    t.index ["item_id"], name: "index_sales_on_item_id"
     t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_005933) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "books", "users"
   add_foreign_key "carts", "users"
-  add_foreign_key "sales", "books"
+  add_foreign_key "items", "users"
+  add_foreign_key "sales", "items"
   add_foreign_key "sales", "users"
 end

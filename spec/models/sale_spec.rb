@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Sale, type: :model do
   it "should have a valid factory" do
     user = FactoryBot.build(:user)
-    book = FactoryBot.build(:book)
-    sale = FactoryBot.build(:sale, user: user, book: book)
+    item = FactoryBot.build(:item)
+    sale = FactoryBot.build(:sale, user: user, item: item)
     expect(sale).to be_valid
   end
 
@@ -29,16 +29,16 @@ RSpec.describe Sale, type: :model do
 	  	
 	  		it "should belong to a user" do
 	  			user = FactoryBot.build(:user)
-          book = FactoryBot.build(:book)
-	  			sale = FactoryBot.build(:sale, user: user, book: book)
+          item = FactoryBot.build(:item)
+	  			sale = FactoryBot.build(:sale, user: user, item: item)
 	  			expect(sale.user).to eq user
 	  		end
 	  	
-	  		it "should belong to a book" do
+	  		it "should belong to a item" do
 					user = FactoryBot.build(:user)
-					book = FactoryBot.build(:book)
-	  			sale = FactoryBot.build(:sale, user: user, book: book)
-	  			expect(sale.book).to eq book
+					item = FactoryBot.build(:item)
+	  			sale = FactoryBot.build(:sale, user: user, item: item)
+	  			expect(sale.item).to eq item
 	  		end
 	  	
 

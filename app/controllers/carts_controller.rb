@@ -57,12 +57,12 @@ class CartsController < ApplicationController
     end
   end
 
-  def add_book
+  def add_item
     cart = current_user.cart
-    book = Book.find(params[:book_id])
-    same_books_already_added = cart.books.where(id: book.id)
-    if (book.stock - same_books_already_added.count > 0)
-      cart.books << book
+    item = Item.find(params[:item_id])
+    same_items_already_added = cart.items.where(id: item.id)
+    if (item.stock - same_items_already_added.count > 0)
+      cart.items << item
       cart.save
       respond_to do |format|
         format.html
@@ -73,26 +73,26 @@ class CartsController < ApplicationController
     end
   end
 
-  def delete_book
+  def delete_item
     cart = current_user.cart
-    book = Book.find(params[:book_id])
-    same_books_already_added = cart.books.where(id: book.id).count
-    cart.books.delete(book)
-    (1..same_books_already_added-1).each { cart.books << book }
+    item = Item.find(params[:item_id])
+    same_items_already_added = cart.items.where(id: item.id).count
+    cart.items.delete(book)
+    (1..same_items_already_added-1).each { cart.items << book }
     cart.save
-    redirect_to cart, notice: 'Book removed from cart.'
+    redirect_to cart, notice: 'Item removed from cart.'
   end
 
   def pay_cart
     cart = current_user.cart
-    total_to_pay = cart.books&.sum(:price)
+    total_to_pay = cart.items&.sum(:price)
     errors = []
-    cart.books&.order("id ASC")&.each do |book|
+    cart.items&.order("id ASC")&.each do |book|
       if book.stock < 1
         errors << '-Sorry book <b>' + book.title + '</b> was buyed and out of stock. <br>'
       end
     end
-    errors << '<b class="text-danger"> Please remove books out of stock to proceed with the buy </b>' if errors.any?
+    errors << '<b class="text-danger"> Please remove items out of stock to proceed with the buy </b>' if errors.any?
     redirect_to cart, notice: errors.to_sentence(two_words_connector: '') and return if errors.any?
 
     redirect_to cart, notice: 'You dont have enough balance.' and return if total_to_pay > current_user.balance
@@ -100,7 +100,7 @@ class CartsController < ApplicationController
     # Pass the book information to buyer and save the sale to seller
     last_book = 0
     stock_to_discount = 1
-    cart.books&.order("id ASC")&.each do |book|
+    cart.items&.order("id ASC")&.each do |book|
       if(last_book == book.id)
         stock_to_discount += 1
       else
@@ -112,7 +112,7 @@ class CartsController < ApplicationController
         sold_book = book.dup
         sold_book.sold = true
         sold_book.stock = nil
-        current_user.books << sold_book
+        current_user.items << sold_book
         current_user.save
         sale = Sale.new(user: seller, book: sold_book, app_fee: $app_fee)
         if sale.save!
@@ -121,14 +121,14 @@ class CartsController < ApplicationController
           admin = User.find_by_email('admin@mail.com')
           admin.balance += $app_fee
           admin.save!
-          cart.books.delete(book)
+          cart.items.delete(book)
           cart.save
         end
       else
       end
       last_book = book.id
     end
-    redirect_to root_path, notice: 'Payment succesfully, books added to your library'
+    redirect_to root_path, notice: 'Payment succesfully, items added to your library'
   end
 
   private

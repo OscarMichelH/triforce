@@ -20,7 +20,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Book</th>
+      <th>Item</th>
       <th>Price</th>
       <th>App Fee</th>
       <th>Sale date</th>
@@ -30,8 +30,8 @@
   <tbody>
     <% @sales.each do |sale| %>
       <tr>
-        <td><%= sale.book.title %></td>
-        <td><%= sale.book.price %></td>
+        <td><%= sale.item.title %></td>
+        <td><%= sale.item.price %></td>
         <td><%= sale.app_fee || 0%></td>
         <td><%= sale.created_at %></td>
       </tr>

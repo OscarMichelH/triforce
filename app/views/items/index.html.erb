@@ -1,0 +1,78 @@
+<p id="notice"><%= notice %></p>
+
+  <div class="row mb-2">
+    <div class="col-12">
+      <% if !params['buyer_libray'] %>
+        <h1>Items</h1>
+      <% else %>
+        <h1>My Items</h1>
+      <% end %>
+    </div>
+    <div class="col-12">
+      <input id="search_general" type="text" class="validate form-control" placeholder="General Search (Look for title, author, or description)" >
+    </div>
+  </div>
+  <br>
+  <div class="row" id="table_results">
+    <% @items&.each do |item| %>
+      <% if (((current_user&.is_buyer? || true) && item.stock && item.stock > 0) || params['buyer_libray'] || current_user&.is_seller?)%>
+        <div class="card col-3 mx-3" style="width: 16rem;">
+          <h5 class="card-title d-inline"><%= item.title %></h5>
+          <% if !params['buyer_libray'] %>
+            <p class="badge bg-primary text-white">Price: $<%= item.price %></p>
+          <% end %>
+          <% if user_signed_in? && current_user.is_seller?  %>
+            <p class="badge bg-secondary text-white">App Fee Per Sale: $<%= $app_fee %></p>
+          <% end %>
+          <b class="card-subtitle mb-2 text-muted pt-2">Author: <%= item.author %></b>
+          <p class="card-text"><%=item.description.truncate(100) %></p>
+          <% if !params['buyer_libray'] %>
+            <p class="badge bg-light d-inline text-dark">Stock: <%= item.stock %></p>
+            <br>
+            <%= link_to 'Add To Card', add_item_path(item), remote: true if user_signed_in? && current_user.is_buyer? %>
+          <% end %>
+          <%= link_to 'Edit', edit_item_path(item) if user_signed_in? && current_user.is_seller? && current_user&.items&.find_by_id(item.id)%>
+        </div>
+
+      <% end %>
+    <% end %>
+  </div>
+
+
+
+<br>
+
+<%= link_to 'New Item', new_item_path, class: 'btn btn-primary rounded-pill mt-1' if user_signed_in? && current_user.is_seller? && params['buyer_libray'] %>
+
+<script type="text/javascript" charset="utf-8">
+    var searchBox = document.getElementById('search_general');
+
+    searchBox.onkeyup = function(){
+        var filter = searchBox.value.toLowerCase();
+        var tr = document.getElementById('table_results').getElementsByTagName("div");
+
+        for (i = 0; i < tr.length; i++) {
+            var td_one = tr[i].getElementsByTagName("h5")[0];
+            var td_two = tr[i].getElementsByTagName("b")[0];
+            <% if !params['buyer_libray'] %>
+            var td_three = tr[i].getElementsByTagName("p")[1];
+            <% else %>
+            var td_three = tr[i].getElementsByTagName("p")[0];
+
+            <% end %>
+
+            if (td_one || td_two || td_three) {
+                var txtValue = td_one.textContent || td_one.innerText;
+                var txtValue2 = td_two.textContent || td_two.innerText;
+                var txtValue3 = td_three.textContent || td_three.innerText;
+                if ( txtValue.toLowerCase().indexOf(filter) > -1 ||
+                    txtValue2.toLowerCase().indexOf(filter) > -1 ||
+                    txtValue3.toLowerCase().indexOf(filter) > -1 ){
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   validates :email, uniqueness: true
   validate :buyer_xor_seller
-  has_many :books
+  has_many :items
   has_one :cart
   has_many :sales, dependent: :delete_all
 

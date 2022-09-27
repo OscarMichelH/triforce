@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom " >
   <div class="pl-3 text-white">
-    <h1><%= link_to 'Bookstore', root_path, class: 'text-white' %></h1>
+    <h1><%= link_to 'Woman Shop', root_path, class: 'text-white' %></h1>
   </div>
   <% if !current_user %>
 
@@ -18,7 +18,7 @@
               <li class="nav-item m-1">
                 <%= link_to cart_path(current_user&.cart&.id || '') do %>
                   <i class="bi bi-cart-fill text-white"></i>
-                  <p id="books_in_cart" class="text-white d-inline"><%= current_user&.cart&.books&.count %></p>
+                  <p id="items_in_cart" class="text-white d-inline"><%= current_user&.cart&.items&.count %></p>
                 <% end %>
               </li>
             <% end %>

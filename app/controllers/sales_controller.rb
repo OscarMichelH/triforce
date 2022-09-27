@@ -5,7 +5,7 @@ class SalesController < ApplicationController
   def index
     @sales = current_user.sales
     @amount_sold = 0
-    @sales.each {|sale| @amount_sold += sale&.book&.price || 0}
+    @sales.each {|sale| @amount_sold += sale&.item&.price || 0}
 
   end
 
@@ -59,6 +59,6 @@ class SalesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sale_params
-      params.require(:sale).permit(:book, :user)
+      params.require(:sale).permit(:item, :user)
     end
 end
