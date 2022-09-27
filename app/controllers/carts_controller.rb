@@ -77,8 +77,8 @@ class CartsController < ApplicationController
     cart = current_user.cart
     item = Item.find(params[:item_id])
     same_items_already_added = cart.items.where(id: item.id).count
-    cart.items.delete(book)
-    (1..same_items_already_added-1).each { cart.items << book }
+    cart.items.delete(item)
+    (1..same_items_already_added-1).each { cart.items << item }
     cart.save
     redirect_to cart, notice: 'Item removed from cart.'
   end
@@ -87,9 +87,9 @@ class CartsController < ApplicationController
     cart = current_user.cart
     total_to_pay = cart.items&.sum(:price)
     errors = []
-    cart.items&.order("id ASC")&.each do |book|
-      if book.stock < 1
-        errors << '-Sorry book <b>' + book.title + '</b> was buyed and out of stock. <br>'
+    cart.items&.order("id ASC")&.each do |item|
+      if item.stock < 1
+        errors << '-Sorry item <b>' + item.title + '</b> was buyed and out of stock. <br>'
       end
     end
     errors << '<b class="text-danger"> Please remove items out of stock to proceed with the buy </b>' if errors.any?
@@ -97,36 +97,36 @@ class CartsController < ApplicationController
 
     redirect_to cart, notice: 'You dont have enough balance.' and return if total_to_pay > current_user.balance
     current_user.balance = current_user.balance - total_to_pay
-    # Pass the book information to buyer and save the sale to seller
-    last_book = 0
+    # Pass the item information to buyer and save the sale to seller
+    last_item = 0
     stock_to_discount = 1
-    cart.items&.order("id ASC")&.each do |book|
-      if(last_book == book.id)
+    cart.items&.order("id ASC")&.each do |item|
+      if(last_item == item.id)
         stock_to_discount += 1
       else
         stock_to_discount = 1
       end
-      if (book.stock - stock_to_discount >= 0)
-        book.update(stock: book.stock - stock_to_discount)
-        seller = User.find(book.user.id)
-        sold_book = book.dup
-        sold_book.sold = true
-        sold_book.stock = nil
-        current_user.items << sold_book
+      if (item.stock - stock_to_discount >= 0)
+        item.update(stock: item.stock - stock_to_discount)
+        seller = User.find(item.user.id)
+        sold_item = item.dup
+        sold_item.sold = true
+        sold_item.stock = nil
+        current_user.items << sold_item
         current_user.save
-        sale = Sale.new(user: seller, book: sold_book, app_fee: $app_fee)
+        sale = Sale.new(user: seller, item: sold_item, app_fee: $app_fee)
         if sale.save!
-          seller.balance += sold_book.price - $app_fee
+          seller.balance += sold_item.price - $app_fee
           seller.save!
           admin = User.find_by_email('admin@mail.com')
           admin.balance += $app_fee
           admin.save!
-          cart.items.delete(book)
+          cart.items.delete(item)
           cart.save
         end
       else
       end
-      last_book = book.id
+      last_item = item.id
     end
     redirect_to root_path, notice: 'Payment succesfully, items added to your library'
   end

@@ -89,24 +89,24 @@ RSpec.describe "/items", type: :request do
 
       it "updates the requested item" do
         item = Item.create! valid_attributes
-        patch book_url(book), params: { book: new_attributes }
-        book.reload
+        patch item_url(item), params: { item: new_attributes }
+        item.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the book" do
-        book = Item.create! valid_attributes
-        patch book_url(book), params: { book: new_attributes }
-        book.reload
-        expect(response).to redirect_to(book_url(book))
+      it "redirects to the item" do
+        item = Item.create! valid_attributes
+        patch item_url(item), params: { item: new_attributes }
+        item.reload
+        expect(response).to redirect_to(item_url(item))
       end
     end
 
     context "with invalid parameters" do
     
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        book = Item.create! valid_attributes
-        patch book_url(book), params: { book: invalid_attributes }
+        item = Item.create! valid_attributes
+        patch item_url(item), params: { item: invalid_attributes }
         expect(response).to be_successful
       end
     
@@ -114,16 +114,16 @@ RSpec.describe "/items", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested book" do
-      book = Item.create! valid_attributes
+    it "destroys the requested item" do
+      item = Item.create! valid_attributes
       expect {
-        delete book_url(book)
+        delete item_url(item)
       }.to change(Item, :count).by(-1)
     end
 
     it "redirects to the items list" do
-      book = Item.create! valid_attributes
-      delete book_url(book)
+      item = Item.create! valid_attributes
+      delete item_url(item)
       expect(response).to redirect_to(items_url)
     end
   end
