@@ -1,12 +1,16 @@
 // External libraries
 
-@import "bootstrap";
+
+$primary: #a94e7a;
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+@import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "core/avatars/avatar";
-$theme-colors: (
-        $primary: $pink
-);
+
 
 @font-face {
   font-family: "bootstrap-icons";
