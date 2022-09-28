@@ -18,6 +18,30 @@
       <% if (((current_user&.is_buyer? || true) && item.stock && item.stock > 0) || params['buyer_libray'] || current_user&.is_seller?)%>
         <div class="card col-3 mx-3" style="width: 16rem;">
           <h5 class="card-title d-inline"><%= item.title %></h5>
+
+          <% if item.images %>
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <% item.images.each_with_index do |image, index| %>
+                  <div class="<%= index == 0 ?  "carousel-item active" :  "carousel-item" %>" >
+                    <div class="d-flex justify-content-center">
+                      <%= image_tag image, style: 'width: 175px; display: block', class: 'p-2'%>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+              <% if item.images.count > 1 %>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              <% end %>
+            </div>
+          <% end %>
           <% if !params['buyer_libray'] %>
             <p class="badge bg-primary text-white">Price: $<%= item.price %></p>
           <% end %>
