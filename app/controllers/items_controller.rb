@@ -62,6 +62,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def delete_image_attachment
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge
+    redirect_back(fallback_location: items_path)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
@@ -70,6 +76,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:title, :description, :author, :price, :stock, :user_id)
+      params.require(:item).permit(:title, :description, :author, :price, :stock, :user_id, images: [])
     end
 end
