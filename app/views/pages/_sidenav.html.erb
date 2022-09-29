@@ -4,14 +4,14 @@
         <li class="nav-item">
           <%= link_to items_path(buyer_libray: true), class: 'm-1 text-white' do %>
             <i class="bi bi-collection-fill text-white ml-3"></i>
-            <span class="nav-link-text text-white ml-1">My Articles</span>
+            <span class="nav-link-text text-white ml-1"><%= t('general.my.other') + ' '+ t('activerecord.models.item.other') %></span>
           <% end %>
         </li>
         <% if current_user.is_seller? %>
         <li class="nav-item">
           <%= link_to sales_path, class: 'm-1 text-white' do %>
             <i class="bi bi-cash-coin text-white ml-3"></i>
-            <span class="nav-link-text text-white ml-1">Sales</span>
+            <span class="nav-link-text text-white ml-1"><%= t('activerecord.models.sale.other') %></span>
           <% end %>
         </li>
         <% end %>

@@ -3,13 +3,13 @@
   <div class="row mb-2">
     <div class="col-12">
       <% if !params['buyer_libray'] %>
-        <h1>Items</h1>
+        <h1><%= t('activerecord.models.item.other') %></h1>
       <% else %>
-        <h1>My Items</h1>
+        <h1><%= t('general.my.other') + ' ' + t('activerecord.models.item.other') %></h1>
       <% end %>
     </div>
     <div class="col-12">
-      <input id="search_general" type="text" class="validate form-control" placeholder="General Search (Look for title, author, or description)" >
+      <input id="search_general" type="text" class="validate form-control" placeholder="<%= t('general.general_search') %>" >
     </div>
   </div>
   <br>
@@ -43,19 +43,19 @@
             </div>
           <% end %>
           <% if !params['buyer_libray'] %>
-            <p class="badge bg-primary text-white">Price: $<%= item.price %></p>
+            <p class="badge bg-primary text-white"><%= t('activerecord.attributes.item.price') %>: $<%= item.price %></p>
           <% end %>
           <% if user_signed_in? && current_user.is_seller?  %>
-            <p class="badge bg-secondary text-white">App Fee Per Sale: $<%= $app_fee %></p>
+            <p class="badge bg-secondary text-white"><%= t('general.app_fee_per_sale') %> $<%= $app_fee %></p>
           <% end %>
-          <b class="card-subtitle mb-2 text-muted pt-2">Author: <%= item.author %></b>
+          <b class="card-subtitle mb-2 text-muted pt-2"><%=t('activerecord.attributes.item.author') %>: <%= item.author %></b>
           <p class="card-text"><%=item.description.truncate(100) %></p>
           <% if !params['buyer_libray'] %>
-            <p class="badge bg-light d-inline text-dark">Stock: <%= item.stock %></p>
+            <p class="badge bg-light d-inline text-dark"><%=t('activerecord.attributes.item.stock') %>: <%= item.stock %></p>
             <br>
             <%= link_to 'Add To Card', add_item_path(item), remote: true if user_signed_in? && current_user.is_buyer? %>
           <% end %>
-          <%= link_to 'Edit', edit_item_path(item) if user_signed_in? && current_user.is_seller? && current_user&.items&.find_by_id(item.id)%>
+          <%= link_to 'Editar', edit_item_path(item) if user_signed_in? && current_user.is_seller? && current_user&.items&.find_by_id(item.id)%>
         </div>
 
       <% end %>

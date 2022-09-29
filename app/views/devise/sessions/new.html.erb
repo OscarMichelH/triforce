@@ -5,7 +5,7 @@
       <div class="col-4 card">
 
         <div class="align-content-center text-center pt-2 mt-3">
-          <h3>Access to your account</h3>
+          <h3><%= t('devise.access_to_your_account') %></h3>
         </div>
 
         <%= form_for(resource, as: resource_name, html: {class: '', role: 'form'},url: session_path(resource_name)) do |f| %>
@@ -28,7 +28,7 @@
 
 
           <div class="align-content-center text-center pt-4">
-            <%= f.submit "LOG IN", class: "btn-primary rounded-pill bold px-5 p-2", style: '' %>
+            <%= f.submit t('devise.sign_in'), class: "btn-primary rounded-pill bold px-5 p-2", style: '' %>
           </div>
           <%= render "devise/shared/links" %>
 

@@ -10,7 +10,7 @@
 
     <ul class="navbar-nav ml-auto text-right ms-auto mb-2 mb-lg-0 m-1 justify-content-end" >
       <div class="col-12">
-        <%= link_to 'Sign in', new_user_session_path, class: 'text-white' %>
+        <%= link_to t('devise.sign_in'), new_user_session_path, class: 'btn btn-secondary text-white' %>
       </div>
     </ul>
   <%  else %>
@@ -45,7 +45,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <div class="dropdown-header noti-title">
-                    <h6 class="text-overflow m-0">Welcome</h6>
+                    <h6 class="text-overflow m-0"><%= t('general.welcome') %></h6>
                   </div>
                   <%= link_to current_user , class: 'dropdown-item' do %>
                     <i class="ni ni-single-02"></i>
@@ -54,7 +54,7 @@
                   <div class="dropdown-divider"></div>
                   <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do %>
                     <i class="ni ni-user-run"></i>
-                    <span>Sign Out</span>
+                    <span><%= t('devise.sign_out') %></span>
                   <% end %>
                 </ul>
               </div>

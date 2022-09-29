@@ -6,11 +6,11 @@
       <div class="col-4 card">
 
         <div class="align-content-center text-center pt-2 mt-3">
-            <h3>Register a new account</h3>
-            Select account type:
+            <h3><%= t('devise.register_a_new_account') %></h3>
+            <%= t('devise.select_account_type') + ':' %>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-secondary" id="buyer_btn">Buyer</button>
-              <button type="button" class="btn btn-secondary" id="seller_btn">Seller</button>
+              <button type="button" class="btn btn-secondary text-white" id="buyer_btn"><%= t('activerecord.attributes.user.role.buyer') %></button>
+              <button type="button" class="btn btn-secondary text-white" id="seller_btn"><%= t('activerecord.attributes.user.role.seller') %></button>
             </div>
         </div>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -58,7 +58,7 @@
 
 
           <div class="align-content-center text-center pt-4">
-            <%= f.submit "SIGN UP", class: "btn-primary rounded-pill bold px-5 p-2", style: '' %>
+            <%= f.submit t('devise.sign_up'), class: "btn-primary rounded-pill bold px-5 p-2", style: '' %>
           </div>
 
             <%= render "devise/shared/links" %>

@@ -12,6 +12,9 @@ module Shop
     config.load_defaults 6.1
     config.assets.initialize_on_precompile = false
 
+    config.i18n.available_locales = [:es, :en]
+    config.i18n.default_locale = :es
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
