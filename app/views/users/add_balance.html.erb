@@ -1,0 +1,15 @@
+<div class="container">
+  <h1><%= t('general.add_credits') %></h1>
+
+  <%= simple_form_for :user, url: add_credits_path do |f| %>
+    <%= f.input :email, collection: User.order(:email),
+                label_method: :email,
+                value_method: :email,
+                input_html: { class: 'form-control'}
+    %>
+    <br>
+    <%= f.input :ammount, label: 'Creditos', input_html: { class: 'form-control'} %>
+    <br>
+    <%= submit_tag "Agregar" %>
+  <% end %>
+</div>

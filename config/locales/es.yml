@@ -314,13 +314,15 @@ es:
       submit: Guardar %{model}
       update: Actualizar %{model}
   general:
-    welcome: 'Bienvenida'
+    add_credits: 'Agregar créditos'
     app_fee_per_sale: 'Comisión de la app:'
+    general_search: 'Buscador General (Busca por titulo, autor, o descripción)'
     my:
       one: 'Mi'
       other: 'Mis'
     new: 'Nuevo'
-    general_search: 'Buscador General (Busca por titulo, autor, o descripción)'
+    welcome: 'Bienvenida'
+
   number:
     currency:
       format:

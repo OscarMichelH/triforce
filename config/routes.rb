@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
     authenticated do
       root 'items#index', as: :authenticated_root
-      resources :users, only: [:index, :new, :create, :edit, :show, :update, :destroy]
+      get '/add_credits', to: 'users#show_add_credits', as: 'show_add_credits'
+      post '/add_credits', to: 'users#add_credits', as: 'add_credits'
+      resources :users
       resources :items do
         member do
           delete :delete_image_attachment

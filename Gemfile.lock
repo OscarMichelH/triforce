@@ -294,6 +294,9 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     spec_writer (0.1.0)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
@@ -371,6 +374,7 @@ DEPENDENCIES
   rspec-support!
   sass-rails (>= 6)
   selenium-webdriver
+  simple_form
   spec_writer
   turbolinks (~> 5)
   tzinfo-data

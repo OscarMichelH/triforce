@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   # before_action :authenticate_user!
 
   # GET /users
@@ -50,6 +52,23 @@ class UsersController < ApplicationController
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def show_add_credits
+    render 'add_balance'
+  end
+
+  # POST
+  # POST
+  def add_credits
+    user = User.find_by_email(params[:user][:email])
+    credits = params[:user][:ammount].to_f
+    user.balance += credits
+    user.save!
+    respond_to do |format|
+      format.html { redirect_to add_credits_path, notice: 'Credits was successfully added.' }
       format.json { head :no_content }
     end
   end

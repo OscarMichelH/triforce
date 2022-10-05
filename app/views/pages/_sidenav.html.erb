@@ -8,14 +8,21 @@
           <% end %>
         </li>
         <% if current_user.is_seller? %>
-        <li class="nav-item">
-          <%= link_to sales_path, class: 'm-1 text-white' do %>
-            <i class="bi bi-cash-coin text-white ml-3"></i>
-            <span class="nav-link-text text-white ml-1"><%= t('activerecord.models.sale.other') %></span>
-          <% end %>
-        </li>
+          <li class="nav-item">
+            <%= link_to sales_path, class: 'm-1 text-white' do %>
+              <i class="bi bi-cash-coin text-white ml-3"></i>
+              <span class="nav-link-text text-white ml-1"><%= t('activerecord.models.sale.other') %></span>
+            <% end %>
+          </li>
         <% end %>
-
+        <% if current_user.is_admin? %>
+          <li class="nav-item">
+            <%= link_to show_add_credits_path, class: 'm-1 text-white' do %>
+              <i class="bi bi-cash-coin text-white ml-3"></i>
+              <span class="nav-link-text text-white ml-1"><%= t('general.add_credits') %></span>
+            <% end %>
+          </li>
+        <% end %>
 
       </ul>
   </div>
