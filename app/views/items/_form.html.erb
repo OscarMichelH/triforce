@@ -35,7 +35,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :author %>
+    <%= form.label :author, t('activerecord.attributes.item.seller') %>
     <%= form.text_field :author, class: 'form-control' %>
   </div>
 
@@ -51,7 +51,7 @@
 
   <div class="field">
     <%= form.label :app_fee %>
-    <%= form.text_field :app_fee, value: '$' + $app_fee.to_s, class: 'form-control', disabled: true %>
+    <%= form.text_field :app_fee, value: '3%', class: 'form-control', disabled: true %>
   </div>
 
     <%= form.hidden_field :user_id, value: current_user.id %>

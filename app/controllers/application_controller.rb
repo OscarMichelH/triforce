@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
-  $app_fee = 1
+  $app_fee = 0.03
 
   def authenticate_user!
     if user_signed_in?

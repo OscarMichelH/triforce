@@ -46,16 +46,17 @@
             <p class="badge bg-primary text-white"><%= t('activerecord.attributes.item.price') %>: $<%= item.price %></p>
           <% end %>
           <% if user_signed_in? && current_user.is_seller?  %>
-            <p class="badge bg-secondary text-white"><%= t('general.app_fee_per_sale') %> $<%= $app_fee %></p>
+            <p class="badge bg-secondary text-white"><%= t('general.app_fee_per_sale') %> $<%= item.price * $app_fee %></p>
           <% end %>
-          <b class="card-subtitle mb-2 text-muted pt-2"><%=t('activerecord.attributes.item.author') %>: <%= item.author %></b>
+          <b class="card-subtitle mb-2 text-muted pt-2"><%=t('activerecord.attributes.item.seller') %>: <%= item.author %></b>
           <p class="card-text"><%=item.description.truncate(100) %></p>
           <% if !params['buyer_libray'] %>
             <p class="badge bg-light d-inline text-dark"><%=t('activerecord.attributes.item.stock') %>: <%= item.stock %></p>
             <br>
             <%= link_to 'Add To Card', add_item_path(item), remote: true if user_signed_in? && current_user.is_buyer? %>
           <% end %>
-          <%= link_to 'Editar', edit_item_path(item) if user_signed_in? && current_user.is_seller? && current_user&.items&.find_by_id(item.id)%>
+          <%= link_to t('actions.edit'), edit_item_path(item) if user_signed_in? && current_user.is_seller? && current_user&.items&.find_by_id(item.id)%>
+          <%= link_to t('actions.remove'), item, method: :delete if user_signed_in? && current_user.is_seller? && current_user&.items&.find_by_id(item.id)%>
         </div>
 
       <% end %>
@@ -66,7 +67,7 @@
 
 <br>
 
-<%= link_to 'New Item', new_item_path, class: 'btn btn-primary rounded-pill mt-1' if user_signed_in? && current_user.is_seller? && params['buyer_libray'] %>
+<%= link_to t('general.new_item'), new_item_path, class: 'btn btn-primary rounded-pill mt-1' if user_signed_in? && current_user.is_seller? && params['buyer_libray'] %>
 
 <script type="text/javascript" charset="utf-8">
     var searchBox = document.getElementById('search_general');

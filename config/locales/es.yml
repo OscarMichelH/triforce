@@ -3,6 +3,7 @@ es:
   actions:
     edit: 'Editar'
     save: 'Guardar'
+    remove: 'Eliminar'
   activerecord:
     models:
       user:
@@ -45,11 +46,13 @@ es:
           seller: 'Vendedor'
         address: 'Dirección'
       item:
-        author: 'Autor'
+        seller: 'Vendedor'
+        images: 'Imagenes'
         description: 'Descripción'
         price: 'Precio'
         stock: 'Disponibles'
         title: 'Titulo'
+        app_fee: 'Comisión de la apliación'
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'
@@ -315,12 +318,13 @@ es:
       update: Actualizar %{model}
   general:
     add_credits: 'Agregar créditos'
-    app_fee_per_sale: 'Comisión de la app:'
+    app_fee_per_sale: 'Comisión de la app (3%):'
     general_search: 'Buscador General (Busca por titulo, autor, o descripción)'
     my:
       one: 'Mi'
       other: 'Mis'
     new: 'Nuevo'
+    new_item: 'Nuevo Artículo'
     welcome: 'Bienvenida'
 
   number:

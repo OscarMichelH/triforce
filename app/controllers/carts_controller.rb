@@ -114,12 +114,12 @@ class CartsController < ApplicationController
         sold_item.stock = nil
         current_user.items << sold_item
         current_user.save
-        sale = Sale.new(user: seller, item: sold_item, app_fee: $app_fee)
+        sale = Sale.new(user: seller, item: sold_item, app_fee: (sold_item.price * $app_fee))
         if sale.save!
-          seller.balance += sold_item.price - $app_fee
+          seller.balance += sold_item.price - (sold_item.price * $app_fee)
           seller.save!
           admin = User.find_by_email('admin@mail.com')
-          admin.balance += $app_fee
+          admin.balance += (sold_item.price * $app_fee)
           admin.save!
           cart.items.delete(item)
           cart.save

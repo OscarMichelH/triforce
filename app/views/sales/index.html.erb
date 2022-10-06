@@ -11,7 +11,7 @@
     <br>
     <b>Total sales amount:</b> <%= '$' + @amount_sold.to_s %>
     <br>
-    <b>Application sales fees:</b> <%= '$' + @sales.count.to_s %>
+    <b>Application sales fees:</b> <%= '$' + @sales.sum(:app_fee).to_s %>
     <br>
     <b>Earnings:</b> <%= '$' + (@amount_sold - @sales.count).to_s %>
   </div>
