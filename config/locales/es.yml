@@ -325,6 +325,7 @@ es:
       other: 'Mis'
     new: 'Nuevo'
     new_item: 'Nuevo Artículo'
+    reload_balance: 'Recargar Saldo'
     welcome: 'Bienvenida'
 
   number:

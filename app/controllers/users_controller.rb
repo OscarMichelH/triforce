@@ -58,6 +58,11 @@ class UsersController < ApplicationController
     render 'add_balance'
   end
 
+  def reload_balance
+    @user = current_user
+    render 'reload_balance'
+  end
+
   # POST
   # POST
   def add_credits

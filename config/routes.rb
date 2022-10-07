@@ -10,7 +10,9 @@ Rails.application.routes.draw do
       root 'items#index', as: :authenticated_root
       get '/add_credits', to: 'users#show_add_credits', as: 'show_add_credits'
       post '/add_credits', to: 'users#add_credits', as: 'add_credits'
-      resources :users
+      resources :users do
+        get 'reload_balance', to: 'users#reload_balance', as: 'reload_balance'
+      end
       resources :items do
         member do
           delete :delete_image_attachment

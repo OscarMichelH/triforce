@@ -43,10 +43,10 @@
             </div>
           <% end %>
           <% if !params['buyer_libray'] %>
-            <p class="badge bg-primary text-white"><%= t('activerecord.attributes.item.price') %>: $<%= item.price %></p>
+            <p class="badge bg-primary text-white"><%= t('activerecord.attributes.item.price') %>: $<%= item.price.round(2) %></p>
           <% end %>
           <% if user_signed_in? && current_user.is_seller?  %>
-            <p class="badge bg-secondary text-white"><%= t('general.app_fee_per_sale') %> $<%= item.price * $app_fee %></p>
+            <p class="badge bg-secondary text-white"><%= t('general.app_fee_per_sale') %> $<%= (item.price * $app_fee).round(2) %></p>
           <% end %>
           <b class="card-subtitle mb-2 text-muted pt-2"><%=t('activerecord.attributes.item.seller') %>: <%= item.author %></b>
           <p class="card-text"><%=item.description.truncate(100) %></p>

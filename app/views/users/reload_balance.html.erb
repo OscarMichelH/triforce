@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <h1 class="text-gray"><%= t('general.reload_balance') %></h1>
+    <p id="notice"><%= notice %></p>
+
+    <h3>Instrucciones:</h3>
+    <h5>Realiza una transferencia bancaria por el saldo que desees agregar con los siguientes datos:</h5>
+
+    <div class="card" style="width: 50rem;">
+      <div class="card-header">
+        Banco: BANCO
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Nombre: <b>NOMBRE APELLIDO APELLIDO</b></li>
+        <li class="list-group-item">Clave: <b>CLAVEINTERBANCARIA</b></li>
+        <li class="list-group-item">Descripción: <b><%= @user.email %></b></li>
+        <li class="list-group-item">Número de Referencia: <b><%= @user.id.to_s.rjust(7, '0') %></b></li>
+      </ul>
+    </div>
+</div>
+
