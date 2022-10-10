@@ -33,7 +33,7 @@
   </div>
   <div class="row" id="table_results">
     <% @items&.each do |item| %>
-      <div class="col-4">
+      <div class="col-3 p-2">
         <% if (((current_user&.is_buyer? || true) && item.stock && item.stock > 0) || params['buyer_libray'] || current_user&.is_seller?)%>
         <div class="card col-3 mx-3" style="width: 16rem;">
           <h5 class="card-title d-inline"><%= item.title %></h5>
