@@ -87,7 +87,7 @@
 
 <br>
 
-<%= link_to t('general.new_item'), new_item_path, class: 'btn btn-primary rounded-pill mt-1' if user_signed_in? && current_user.admin? && params['buyer_libray'] %>
+<%= link_to t('general.new_item'), new_item_path, class: 'btn btn-primary rounded-pill mt-1' if user_signed_in? && current_user.is_admin? && params['buyer_libray'] %>
 
 <script type="text/javascript" charset="utf-8">
     var searchBox = document.getElementById('search_general');
