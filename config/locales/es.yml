@@ -10,8 +10,8 @@ es:
         one: 'Usuario'
         other: 'Usuarios'
       item:
-        one: 'Artículo'
-        other: 'Artículos'
+        one: 'Producto'
+        other: 'Productos'
       sale:
         one: 'Venta'
         other: 'Ventas'
@@ -319,7 +319,7 @@ es:
   general:
     add_credits: 'Agregar créditos'
     app_fee_per_sale: 'Comisión de la app (3%):'
-    general_search: 'Buscador General (Busca por titulo, autor, o descripción)'
+    general_search: 'Buscador (Busca por producto, vendedor, o descripción)'
     my:
       one: 'Mi'
       other: 'Mis'
