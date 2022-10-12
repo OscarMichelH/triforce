@@ -155,6 +155,9 @@ en:
       create: Create %{model}
       submit: Save %{model}
       update: Update %{model}
+  icons:
+    register: '/icons/register.svg'
+    login: '/icons/login.svg'
   number:
     currency:
       format:

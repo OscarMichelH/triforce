@@ -309,13 +309,6 @@ es:
       header:
         one: "%{model} no pudo guardarse debido a 1 error"
         other: "%{model} no pudo guardarse debido a %{count} errores"
-  helpers:
-    select:
-      prompt: Por favor selecciona
-    submit:
-      create: Crear %{model}
-      submit: Guardar %{model}
-      update: Actualizar %{model}
   general:
     add_credits: 'Agregar créditos'
     app_fee_per_sale: 'Comisión de la app (3%):'
@@ -327,6 +320,17 @@ es:
     new_item: 'Nuevo Artículo'
     reload_balance: 'Recargar Saldo'
     welcome: 'Bienvenida'
+
+  helpers:
+    select:
+      prompt: Por favor selecciona
+    submit:
+      create: Crear %{model}
+      submit: Guardar %{model}
+      update: Actualizar %{model}
+  icons:
+    register: '/icons/registrar.svg'
+    login: '/icons/sesion.svg'
 
   number:
     currency:
