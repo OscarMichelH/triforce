@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
       if @user.save
         if(@user.is_buyer?)
           cart = Cart.new(user: @user)
-          cart.save
+          cart.save!
         end
         format.html { redirect_to new_user_session_path, notice: 'User created successfully.' }
         format.json { render :show, status: :created, location: @user }

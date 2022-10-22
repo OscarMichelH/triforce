@@ -8,7 +8,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   def is_buyer?
     role == 'BUYER'
@@ -20,6 +20,18 @@ class User < ApplicationRecord
 
   def is_admin?
     role == 'ADMIN'
+  end
+
+  def validate_cart
+    if self.is_buyer?
+      if !self.cart
+        cart = Cart.new(user: self)
+        cart.save!
+        return cart.id
+      else
+        return self.cart.id
+      end
+    end
   end
 
   private

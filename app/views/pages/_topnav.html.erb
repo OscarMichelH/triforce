@@ -22,7 +22,7 @@
           <ul class="navbar-nav ml-auto text-right ms-auto mb-2 mb-lg-0 m-1 justify-content-end">
             <% if current_user.is_buyer? %>
               <li class="nav-item m-1">
-                <%= link_to cart_path(current_user&.cart&.id || '') do %>
+                <%= link_to cart_path(current_user&.cart&.id || current_user.validate_cart) do %>
                   <i class="bi bi-cart-fill text-white"></i>
                   <p id="items_in_cart" class="text-white d-inline"><%= current_user&.cart&.items&.count %></p>
                 <% end %>

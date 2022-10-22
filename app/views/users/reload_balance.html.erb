@@ -3,18 +3,22 @@
     <p id="notice"><%= notice %></p>
 
     <h3>Instrucciones:</h3>
-    <h5>Realiza una transferencia bancaria por el saldo que desees agregar con los siguientes datos:</h5>
+    <h5>Realiza una transferencia bancaria por el saldo que desees agregar (recarga minima $50 mxn) con los siguientes datos:</h5>
 
     <div class="card" style="width: 50rem;">
       <div class="card-header">
         Banco: BANCO
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Nombre: <b>NOMBRE APELLIDO APELLIDO</b></li>
-        <li class="list-group-item">Clave: <b>CLAVEINTERBANCARIA</b></li>
+        <li class="list-group-item">Nombre: <b>DANYA ELIZABETH CHAPA AMBRIZ</b></li>
+        <li class="list-group-item">Banco: <b>Santander</b></li>
+        <li class="list-group-item">Clave: <b>014580200076485583</b></li>
         <li class="list-group-item">Descripción: <b><%= @user.email %></b></li>
         <li class="list-group-item">Número de Referencia: <b><%= @user.id.to_s.rjust(7, '0') %></b></li>
       </ul>
     </div>
+    <br><br>
+    <p>Transcurrido algunos minutos tu saldo se verá reflejado. De lo contrario contactanos a traves del mail womanshop.notify@gmail.com</p>
+
 </div>
 

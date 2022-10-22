@@ -3,3 +3,12 @@ require_relative "application"
 
 # Initialize the Rails application.
 Rails.application.initialize!
+
+ActionMailer::Base.smtp_settings = {
+  user_name:      'apikey',
+  password:       ENV['SENDGRID_SECRET'],
+  domain: 'womanshop.mx',
+  address:        "smtp.sendgrid.net",
+  port:            587,
+  authentication: :plain,
+}
