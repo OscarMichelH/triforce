@@ -11,4 +11,16 @@ class ApplicationController < ActionController::Base
       ## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
     end
   end
+
+  def validate_provider
+    unless current_user.is_provider?
+      redirect_to root_path
+    end
+  end
+
+  def validate_admin
+    unless current_user.is_admin?
+      redirect_to root_path
+    end
+  end
 end

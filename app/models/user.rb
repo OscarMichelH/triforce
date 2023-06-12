@@ -22,6 +22,10 @@ class User < ApplicationRecord
     role == 'ADMIN'
   end
 
+  def is_provider?
+    role == 'PROVIDER'
+  end
+
   def validate_cart
     if self.is_buyer?
       if !self.cart

@@ -1,29 +1,143 @@
-}<p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<h1>
   <%= @item.title %>
-</p>
-
+</h1>
+<% if @item.images %>
+  <div id="<%= 'carouselItem' + @item.id.to_s %>" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <% @item.images.each_with_index do |image, index| %>
+        <div class="<%= index == 0 ?  "carousel-item active" :  "carousel-item" %>" style=" width:100%; height: 30vw !important;">
+          <div class="d-flex justify-content-center">
+            <%= image_tag image, style: 'width: 375px; display: block', class: 'p-2'%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% if @item.images.count > 1 %>
+      <button class="carousel-control-prev" type="button" data-bs-target="<%= '#carouselItem' + @item.id.to_s %>"  data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="<%= '#carouselItem' + @item.id.to_s %>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+    <% end %>
+  </div>
+<% end %>
 <p>
-  <strong>Description:</strong>
   <%= @item.description %>
 </p>
 
 <p>
-  <strong>Author:</strong>
-  <%= @item.author %>
-</p>
-
-<p>
-  <strong>Price:</strong>
+  <strong>Precio:</strong>
   <%= @item.price %>
 </p>
 
 <p>
-  <strong>Seller:</strong>
+  <strong>Vendedor:</strong>
   <%= @item.user&.name %>
 </p>
+
+<% if current_user.is_seller? || current_user.is_admin? %>
+  <% if @item.discounts.any? %>
+    <div class="row">
+      <div class="container-fluid m-2">
+        <button class="btn btn-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">
+          Ver comisiones
+        </button>
+        <div class="collapse" id="collapse1">
+          <div class="well">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Porcentaje</th>
+                  <th>Descuento De Monto Fijo</th>
+                  <th>Cantidad Requerida a Vender</th>
+                  <th>Número de Articulos</th>
+                  <th colspan="3"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <% @item.discounts.each do |discount| %>
+                  <tr>
+                    <td><%= discount.percentage %></td>
+                    <td><%= discount.direct %></td>
+                    <td><%= discount.quantity %></td>
+                    <td><%= discount.pieces %></td>
+
+                    <td>
+                      <%= link_to edit_discount_path(discount) do %>
+                        <i class="bi bi-pencil-fill"></i>
+                      <% end %>
+                    </td>
+
+                    <td>
+                      <%= link_to discount, method: :delete, data: { confirm: '¿Estas seguro?' } do %>
+                        <i class="bi bi-trash-fill"></i>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="container-fluid mb-2">
+      <button class="btn btn-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Agregar Comisión De Vendedor
+      </button>
+      <div class="collapse" id="collapseExample">
+        <div class="well">
+          <%= simple_form_for(@discount, local: true) do |f| %>
+            <% if @discount.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(incoming.errors.count, "error") %> prohibited this discount from being saved:</h2>
+
+                <ul>
+                  <% @incoming.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+
+            <div class="form-inputs">
+              <br>
+<!--              Tipo de comisión:-->
+              <%#= f.select :type, options_for_select(['PORCENTAJE', 'CANTIDAD', 'FIJO']) , include_blank: true %>
+              <%= f.input :percentage, label: 'Porcentaje' %>
+              <%= f.input :direct, label: 'Descuento De Monto Fijo' %>
+              <%= f.input :quantity, label: 'Cantidad Requerida a Vender' %>
+              <%= f.input :pieces, label: 'Número de Articulos' %>
+              <%= f.hidden_field :item_id, value: @item.id %>
+            </div>
+
+
+
+            <br>
+            <div class="actions">
+              <%= f.submit "Guardar" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

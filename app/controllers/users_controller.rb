@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
+  before_action :validate_admin, only: [:add_credits, :show_add_credits]
 
   # GET /users
   # GET /users.json

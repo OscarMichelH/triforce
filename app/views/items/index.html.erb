@@ -36,7 +36,7 @@
       <div class="col-3 p-2">
         <% if (((current_user&.is_buyer? || true) && item.stock && item.stock > 0) || params['buyer_libray'] || current_user&.is_seller?)%>
         <div class="card col-3 mx-3" style="width: 16rem;">
-          <h5 class="card-title d-inline"><%= item.title %></h5>
+          <h5 class="card-title d-inline"><%= link_to item.title, item %></h5>
 
           <% if item.images %>
             <div id="<%= 'carouselItem' + item.id.to_s %>" class="carousel slide" data-bs-ride="carousel">
@@ -72,8 +72,8 @@
             <br>
             <%= link_to 'Add To Card', add_item_path(item), remote: true if user_signed_in? && current_user.is_buyer? %>
           <% end %>
-          <%= link_to t('actions.edit'), edit_item_path(item) if user_signed_in? && current_user.is_admin? && current_user&.items&.find_by_id(item.id)%>
-          <%= link_to t('actions.remove'), item, method: :delete if user_signed_in? && current_user.is_admin? && current_user&.items&.find_by_id(item.id)%>
+          <%= link_to t('actions.edit'), edit_item_path(item) if user_signed_in? && current_user.is_provider? && current_user&.items&.find_by_id(item.id)%>
+          <%= link_to t('actions.remove'), item, method: :delete if user_signed_in? && current_user.is_provider? && current_user&.items&.find_by_id(item.id)%>
         </div>
 
       <% end %>
@@ -85,7 +85,7 @@
 
 <br>
 
-<%= link_to t('general.new_item'), new_item_path, class: 'btn btn-primary rounded-pill mt-1' if user_signed_in? && current_user.is_admin? && params['buyer_libray'] %>
+<%= link_to t('general.new_item'), new_item_path, class: 'btn btn-primary text-white rounded-pill mt-1' if user_signed_in? && current_user.is_provider? && params['buyer_libray'] %>
 
 <script type="text/javascript" charset="utf-8">
     var searchBox = document.getElementById('search_general');

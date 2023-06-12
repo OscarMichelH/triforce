@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :discounts
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   devise_scope :user do
@@ -23,6 +24,6 @@ Rails.application.routes.draw do
       get '/pay_cart', to: 'carts#pay_cart', as: 'pay_cart'
       resources :sales, only: [:index, :create, :update, :destroy]
       resources :carts
-    end
+        end
   end
 end

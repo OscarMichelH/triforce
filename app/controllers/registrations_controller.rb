@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
           cart = Cart.new(user: @user)
           cart.save!
         end
-        format.html { redirect_to new_user_session_path, notice: 'User created successfully.' }
+        format.html { redirect_to new_user_session_path, notice: 'Siga las instrucciones en el correo enviado a ' + @user.email + ', para verificar su usuario.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

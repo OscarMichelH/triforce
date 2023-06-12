@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1 or /items/1.json
   def show
+    @discount = Discount.new
   end
 
   # GET /items/new
