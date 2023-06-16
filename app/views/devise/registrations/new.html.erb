@@ -10,7 +10,7 @@
             <%= t('devise.select_account_type') + ':' %>
             <div class="btn-group" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-secondary text-white" id="buyer_btn"><%= t('activerecord.attributes.user.role.buyer') %></button>
-<!--              <button type="button" class="btn btn-secondary text-white" id="seller_btn"><%#= t('activerecord.attributes.user.role.seller') %></button>-->
+              <button type="button" class="btn btn-secondary text-white" id="seller_btn"><%= t('activerecord.attributes.user.role.seller') %></button>
             </div>
         </div>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
