@@ -118,6 +118,6 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "womanshop.mx" }
+  config.action_mailer.default_url_options = { host: "thewomanshop.herokuapp.com" }
   config.action_mailer.perform_deliveries = true
 end
