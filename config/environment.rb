@@ -5,10 +5,13 @@ require_relative "application"
 Rails.application.initialize!
 
 ActionMailer::Base.smtp_settings = {
-  user_name:      'apikey',
-  password:       ENV['SENDGRID_SECRET'],
-  domain: 'womanshop.mx',
-  address:        "smtp.sendgrid.net",
-  port:            587,
-  authentication: :plain,
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               'localhost:3000',
+  user_name:            ENV['SMTP_USERNAME'],
+  password:             ENV['SMTP_PASSWORD'],
+  authentication:       'plain',
+  enable_starttls_auto: true,
+  open_timeout:         5,
+  read_timeout:         5
 }
