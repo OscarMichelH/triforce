@@ -1,4 +1,4 @@
-<h1>Shopping Cart</h1>
+<h1>Carrito De Compras</h1>
 <hr>
 <p id="notice"><%= notice&.html_safe %></p>
 
@@ -13,9 +13,9 @@
               <i class="bi bi-trash3-fill text-danger"></i>
             <% end %>
           </h5>
-          <h6 class="card-subtitle mb-2 text-muted">Author: <%= item.author %></h6>
+<!--          <h6 class="card-subtitle mb-2 text-muted">Author: <%#= item.author %></h6>-->
           <p class="card-text"><%=item.description&.truncate(25) %></p>
-          <a href="#" class="card-link">Price: <%= item.price.round(2) %></a>
+          <a class="card-link">Precio: <%= item.price.round(2) %></a>
         </div>
       </div>
     <br>
@@ -32,9 +32,14 @@
   <div class="col-12">
     <p class="d-inline mr-4">Total: <%= @cart.items&.sum(:price) %></p>
 
-    <div id="wallet_container">
-      <%= link_to 'Buy With Balance', pay_cart_path, class: 'btn btn-primary d-inline' %>
+<!--    For custom balance system-->
+    <%#= link_to 'Buy With Balance', pay_cart_path, class: 'btn btn-primary d-inline' %>
+
+    <div class="col-3" >
+      <div id="wallet_container">
+      </div>
     </div>
+
 
 
   </div>

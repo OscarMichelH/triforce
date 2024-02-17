@@ -23,14 +23,16 @@
             <% end %>
           </li>
         <% end %>
-        <% if current_user.is_buyer? %>
-          <li class="nav-item">
-            <%= link_to user_reload_balance_path(current_user), class: 'm-1 text-white' do %>
-              <i class="bi bi-cash-coin text-white ml-3"></i>
-              <span class="nav-link-text text-white ml-1"><%= t('general.reload_balance') %></span>
-            <% end %>
-          </li>
-        <% end %>
+
+<!--        Added custom balance-->
+        <%# if current_user.is_buyer? %>
+<!--          <li class="nav-item">-->
+            <%#= link_to user_reload_balance_path(current_user), class: 'm-1 text-white' do %>
+<!--              <i class="bi bi-cash-coin text-white ml-3"></i>-->
+<!--              <span class="nav-link-text text-white ml-1"><%#= t('general.reload_balance') %></span>-->
+            <%# end %>
+<!--          </li>-->
+        <%# end %>
       </ul>
   </div>
 </aside>
