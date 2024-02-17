@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Rails bookstore: development" uuid="2e3adef5-e500-4d50-b0a1-fde92d849a3c">
+    <data-source source="LOCAL" name="@localhost" uuid="65da4103-4725-47ef-bd12-e95510a98cb9">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/bookstore_development</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="Rails bookstore: production" uuid="5a76d716-ab90-4498-aed0-0c525373a4cf">
+    <data-source source="LOCAL" name="bookstore: test" uuid="3e3bd66b-86ec-494f-99a8-275050e13b51">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/config/database.yml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/bookstore_production</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/triforce_test</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="Rails bookstore: test" uuid="88afa3a5-e0ee-494a-a8a2-e4993e844a50">
+    <data-source source="LOCAL" name="bookstore: development" uuid="7e456d56-7f7c-4cea-b475-042d1695c5e8">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/config/database.yml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/bookstore_test</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/triforce_development</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="bookstore: production" uuid="88c0221f-a535-4f92-bf88-d90343237372">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/triforce_production</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

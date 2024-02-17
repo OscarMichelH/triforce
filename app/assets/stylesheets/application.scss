@@ -1,16 +1,12 @@
 // External libraries
 
 
-$primary: deeppink;
-$secondary: #d783ab;
-$carousel-control-color: deeppink;
+$primary: #1a1818;
+$secondary: #62595e;
+$carousel-control-color: #d5b807;
 
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
+@import "bootstrap";
 
-@import "bootstrap/scss/bootstrap";
-@import "bootstrap-icons/font/bootstrap-icons";
-@import "bootstrap-icons/font/bootstrap-icons.css";
 @import "core/avatars/avatar";
 
 

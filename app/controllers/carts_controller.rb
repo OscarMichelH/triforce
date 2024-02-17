@@ -1,6 +1,7 @@
+require 'mercadopago'
+
 class CartsController < ApplicationController
   before_action :set_cart, only: %i[ show edit update destroy ]
-
   # GET /carts or /carts.json
   def index
     @carts = Cart.all
@@ -8,6 +9,33 @@ class CartsController < ApplicationController
 
   # GET /carts/1 or /carts/1.json
   def show
+    sdk = Mercadopago::SDK.new(ENV["MERCADOPAGO_KEY"])
+
+    preference_data = {}
+    items = []
+
+    @cart.items.each do |item|
+      items.push({
+                   title: item.title,
+                   unit_price: item.price,
+                   quantity: 1
+                 })
+    end
+
+    preference_data["items"] = items
+    preference_data["back_urls"] = {
+      success: request.protocol + request.host_with_port + pay_cart_path,
+      failure: request.protocol + request.host_with_port + cart_path(@cart),
+      pending: request.protocol + request.host_with_port + cart_path(@cart)
+    }
+    preference_data["auto_return"] = "approved"
+    preference_response = sdk.preference.create(preference_data)
+    preference = preference_response[:response]
+
+    puts 'Response status = ' + preference.to_s
+
+    @preference_id = preference['id']
+
   end
 
   # GET /carts/new
@@ -95,8 +123,10 @@ class CartsController < ApplicationController
     errors << '<b class="text-danger"> Please remove items out of stock to proceed with the buy </b>' if errors.any?
     redirect_to cart, notice: errors.to_sentence(two_words_connector: '') and return if errors.any?
 
-    redirect_to cart, notice: 'You dont have enough balance.' and return if total_to_pay > current_user.balance
-    current_user.balance = current_user.balance - total_to_pay
+    #Disabled for card payments
+    # redirect_to cart, notice: 'You dont have enough balance.' and return if total_to_pay > current_user.balance
+    # current_user.balance = current_user.balance - total_to_pay
+
     # Pass the item information to buyer and save the sale to seller
     last_item = 0
     stock_to_discount = 1

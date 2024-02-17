@@ -106,6 +106,9 @@ en:
       day: Day
       month: Month
       year: Year
+  devise:
+    sign_in: Sing In
+    sign_up: Sign Up
   errors:
     format: "%{attribute} %{message}"
     messages:

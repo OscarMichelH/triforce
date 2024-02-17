@@ -35,6 +35,7 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'bootstrap'
+gem "sassc-rails"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
@@ -52,6 +53,9 @@ gem 'devise-i18n'
 
 #For simple forms
 gem 'simple_form'
+
+#Mercadopago
+gem 'mercadopago-sdk'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

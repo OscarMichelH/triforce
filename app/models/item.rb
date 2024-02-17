@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
   def image_type
     images.each do |image|
-      if !image.content_type.in?(%('image/jpeg image/png image/jpg'))
+      if !image.content_type.in?(%('image/jpeg image/png image/webp image/jpg/webp'))
         errors.add(:images, 'needs to be valid format')
       end
     end

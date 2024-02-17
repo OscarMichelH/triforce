@@ -8,7 +8,7 @@
         <div class="align-content-center text-center pt-2 mt-3">
             <h3><%= t('devise.register_a_new_account') %></h3>
             <%= t('devise.select_account_type') + ':' %>
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group" role="group">
               <button type="button" class="btn btn-secondary text-white" id="buyer_btn"><%= t('activerecord.attributes.user.role.buyer') %></button>
               <button type="button" class="btn btn-secondary text-white" id="seller_btn"><%= t('activerecord.attributes.user.role.seller') %></button>
             </div>
@@ -90,4 +90,3 @@
         })
     });
 </script>
-

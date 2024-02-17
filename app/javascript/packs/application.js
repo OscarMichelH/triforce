@@ -12,6 +12,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+require('jquery')
 
 document.addEventListener("turbolinks:load", function(event) {
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
@@ -19,3 +20,4 @@ document.addEventListener("turbolinks:load", function(event) {
         return new bootstrap.Popover(popoverTriggerEl)
     })
 });
+

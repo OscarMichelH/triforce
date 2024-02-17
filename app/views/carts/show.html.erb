@@ -31,7 +31,30 @@
 <div class="row">
   <div class="col-12">
     <p class="d-inline mr-4">Total: <%= @cart.items&.sum(:price) %></p>
-    <%= link_to 'Buy With Balance', pay_cart_path, class: 'btn btn-primary d-inline' %>
+
+    <div id="wallet_container">
+      <%= link_to 'Buy With Balance', pay_cart_path, class: 'btn btn-primary d-inline' %>
+    </div>
+
 
   </div>
 </div>
+<script src="https://sdk.mercadopago.com/js/v2">
+</script>
+<script>
+
+    const mp = new MercadoPago('TEST-d7f510d9-d5e4-4e0d-b538-d95530a014f7', {
+        locale: 'es-MX'
+    });
+
+    mp.bricks().create("wallet", "wallet_container", {
+        initialization: {
+            preferenceId: "<%= @preference_id %>",
+        },
+        customization: {
+            texts: {
+                valueProp: 'smart_option'
+            }
+        }
+    });
+</script>
