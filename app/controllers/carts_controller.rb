@@ -86,7 +86,8 @@ class CartsController < ApplicationController
   end
 
   def add_item
-    cart = current_user.cart
+    user = current_or_guest_user
+    cart = user.cart
     item = Item.find(params[:item_id])
     same_items_already_added = cart.items.where(id: item.id)
     if (item.stock - same_items_already_added.count > 0)

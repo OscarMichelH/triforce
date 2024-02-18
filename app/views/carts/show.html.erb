@@ -35,11 +35,12 @@
 <!--    For custom balance system-->
     <%#= link_to 'Buy With Balance', pay_cart_path, class: 'btn btn-primary d-inline' %>
 
-    <div class="col-3" >
-      <div id="wallet_container">
+    <% if @cart.items&.sum(:price) > 0 %>
+      <div class="col-3" >
+        <div id="wallet_container">
+        </div>
       </div>
-    </div>
-
+    <% end %>
 
 
   </div>
@@ -48,7 +49,7 @@
 </script>
 <script>
 
-    const mp = new MercadoPago('TEST-d7f510d9-d5e4-4e0d-b538-d95530a014f7', {
+    var mp = new MercadoPago('TEST-d7f510d9-d5e4-4e0d-b538-d95530a014f7', {
         locale: 'es-MX'
     });
 

@@ -7,9 +7,11 @@
       <%= render partial: 'pages/topnav', locals: { bg_color_class: yield(:topnav_bg) } %>
 
     </div>
-    <div class="col-2">
-        <%= render 'pages/sidenav' %>
-    </div>
+    <% if !current_user.is_guest %>
+      <div class="col-2">
+          <%= render 'pages/sidenav' %>
+      </div>
+      <% end %>
     <div class="col-10">
       <%= yield %>
     </div>

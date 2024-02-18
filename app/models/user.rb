@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_save :validate_cart
   validates :email, uniqueness: true
   validate :buyer_xor_seller
   has_many :items

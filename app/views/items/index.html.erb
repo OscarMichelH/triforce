@@ -62,15 +62,15 @@
           <% if !params['buyer_libray'] %>
             <p class="badge bg-primary text-white"><%= t('activerecord.attributes.item.price') %>: $<%= item.price.round(2) %></p>
           <% end %>
-          <% if user_signed_in? && current_user.is_seller?  %>
-            <p class="badge bg-secondary text-white"><%= t('general.app_fee_per_sale') %> $<%= (item.price * $app_fee).round(2) %></p>
-          <% end %>
-          <b class="card-subtitle mb-2 text-muted pt-2"><%=t('activerecord.attributes.item.seller') %>: <%= item.author %></b>
+          <%# if user_signed_in? && current_user.is_seller?  %>
+<!--            <p class="badge bg-secondary text-white"><%#= t('general.app_fee_per_sale') %> $<%#= (item.price * $app_fee).round(2) %></p>-->
+          <%# end %>
+<!--          <b class="card-subtitle mb-2 text-muted pt-2"><%#=t('activerecord.attributes.item.seller') %>: <%#= item.author %></b>-->
           <p class="card-text"><%=item.description.truncate(100) %></p>
           <% if !params['buyer_libray'] %>
             <p class="badge bg-light d-inline text-dark"><%=t('activerecord.attributes.item.stock') %>: <%= item.stock %></p>
-            <br>
-            <%= link_to 'Add To Card', add_item_path(item), remote: true if user_signed_in? && current_user.is_buyer? %>
+            <%#= link_to 'Agregar al Carrito', add_item_path(item), remote: true if user_signed_in? && current_user.is_buyer? %>
+            <%= link_to 'Agregar al Carrito', add_item_path(item), class: 'badge bg-dark d-inline text-white m-1', remote: true %>
           <% end %>
           <%= link_to t('actions.edit'), edit_item_path(item) if user_signed_in? && current_user.is_provider? && current_user&.items&.find_by_id(item.id)%>
           <%= link_to t('actions.remove'), item, method: :delete if user_signed_in? && current_user.is_provider? && current_user&.items&.find_by_id(item.id)%>
