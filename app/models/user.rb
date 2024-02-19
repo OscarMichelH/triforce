@@ -3,7 +3,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validate :buyer_xor_seller
   has_many :items
-  has_one :cart
+  has_one :cart, dependent: :destroy
   has_many :sales, dependent: :delete_all
 
   # Include default devise modules. Others available are:
