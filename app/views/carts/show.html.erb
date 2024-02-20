@@ -1,50 +1,54 @@
-<h1>Carrito De Compras</h1>
-<hr>
-<p id="notice"><%= notice&.html_safe %></p>
 
 
-<% @cart.items.each do |item| %>
-  <div class="row">
-  <div class="col-2">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"><%= item.title %>
-            <%= link_to delete_item_path(item), method: :delete, data: { confirm: '¿Are you sure?' } do %>
-              <i class="bi bi-trash3-fill text-danger"></i>
-            <% end %>
-          </h5>
-<!--          <h6 class="card-subtitle mb-2 text-muted">Author: <%#= item.author %></h6>-->
-          <p class="card-text"><%=item.description&.truncate(25) %></p>
-          <a class="card-link">Precio: <%= item.price.round(2) %></a>
+<div class="container-fluid m-4">
+  <h1>Carrito De Compras</h1>
+  <hr>
+  <p id="notice"><%= notice&.html_safe %></p>
+
+  <% @cart.items.each do |item| %>
+    <div class="row">
+      <div class="col-2">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= item.title %>
+              <%= link_to delete_item_path(item), method: :delete, data: { confirm: '¿Are you sure?' } do %>
+                <i class="bi bi-trash3-fill text-danger"></i>
+              <% end %>
+            </h5>
+            <!--          <h6 class="card-subtitle mb-2 text-muted">Author: <%#= item.author %></h6>-->
+            <p class="card-text"><%=item.description&.truncate(25) %></p>
+            <a class="card-link">Precio: <%= item.price.round(2) %></a>
+          </div>
         </div>
+        <br>
       </div>
-    <br>
+
+      <!--    <tr>-->
+      <!--      <td><%#= link_to 'Show', item %></td>-->
+      <!--      <td><%#= link_to 'Edit', edit_item_path(item) %></td>-->
+      <!--      <td><%#= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      <!--    </tr>-->
     </div>
+  <% end %>
+  <div class="row">
+    <div class="col-12">
+      <p class="d-inline mr-4">Total: <%= @cart.items&.sum(:price) %></p>
 
-    <!--    <tr>-->
-    <!--      <td><%#= link_to 'Show', item %></td>-->
-    <!--      <td><%#= link_to 'Edit', edit_item_path(item) %></td>-->
-    <!--      <td><%#= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-    <!--    </tr>-->
-  </div>
-<% end %>
-<div class="row">
-  <div class="col-12">
-    <p class="d-inline mr-4">Total: <%= @cart.items&.sum(:price) %></p>
+      <!--    For custom balance system-->
+      <%#= link_to 'Buy With Balance', pay_cart_path, class: 'btn btn-primary d-inline' %>
 
-<!--    For custom balance system-->
-    <%#= link_to 'Buy With Balance', pay_cart_path, class: 'btn btn-primary d-inline' %>
-
-    <% if @cart.items&.sum(:price) > 0 %>
-      <div class="col-3" >
-        <div id="wallet_container">
+      <% if @cart.items&.sum(:price) > 0 %>
+        <div class="col-3" >
+          <div id="wallet_container">
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
 
 
+    </div>
   </div>
 </div>
+
 <script src="https://sdk.mercadopago.com/js/v2">
 </script>
 <script>
