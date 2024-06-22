@@ -2,11 +2,6 @@ Rails.application.routes.draw do
   resources :discounts
   devise_for :users, :controllers => { registrations: 'registrations' }
 
-  resources :carts
-  get '/add_item/:item_id', to: 'carts#add_item', as: 'add_item'
-  delete '/delete_item/:item_id', to: 'carts#delete_item', as: 'delete_item'
-  get '/pay_cart', to: 'carts#pay_cart', as: 'pay_cart'
-
 
   devise_scope :user do
 
@@ -29,6 +24,12 @@ Rails.application.routes.draw do
       end
 
       resources :sales, only: [:index, :create, :update, :destroy]
-        end
+    end
+
+    resources :carts
+    get '/add_item/:item_id', to: 'carts#add_item', as: 'add_item'
+    delete '/delete_item/:item_id', to: 'carts#delete_item', as: 'delete_item'
+    get '/pay_cart', to: 'carts#pay_cart', as: 'pay_cart'
+    resources :shipments
   end
 end
