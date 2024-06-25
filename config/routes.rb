@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :discounts
   devise_for :users, :controllers => { registrations: 'registrations' }
+  get "/rutinas" => redirect("/rutinas.pdf")
 
   devise_scope :user do
 
